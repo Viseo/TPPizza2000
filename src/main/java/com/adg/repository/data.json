@@ -44,7 +44,7 @@
     },
     {
       "name": "BOEUF - PÉPPERONI",
-      "url": "",
+      "url": "http://image.dominos.fr/images/pizza/PSBPdetail.png",
       "ingredient": [
         {
           "name": "Mozzarella",
@@ -206,7 +206,7 @@
     },
     {
       "name": "CHICKENITA PEPPERONI",
-      "url": "",
+      "url": "http://image.dominos.fr/images/pizza/PCHIdetail.png",
       "ingredient": [
         {
           "name": "Mozzarella",
