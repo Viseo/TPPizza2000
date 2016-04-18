@@ -25,3 +25,5 @@ buildNumber.properties
 # Intellij
 .idea/
 *.iml
+
+out/
