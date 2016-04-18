@@ -1,0 +1,34 @@
+{
+  "pizzas": [
+     {
+      "name": "FIGUE - CHÈVRE",
+       "url": "",
+      "ingredient": [
+        {
+          "name": "Mozzarella",
+          "url": ""
+        },
+        {
+          "name": "Oignons",
+          "url": ""
+        },
+        {
+          "name": "Base Crème Fraîche",
+          "url": ""
+        },
+        {
+          "name": "Fourme d'Ambert",
+          "url": ""
+        },
+        {
+          "name": "Chèvre",
+          "url": ""
+        }
+      ]
+    },
+    {
+
+    }
+  ],
+  "showPizzaNone": true
+}
