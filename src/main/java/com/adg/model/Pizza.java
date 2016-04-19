@@ -7,27 +7,53 @@ import java.util.List;
  */
 public class Pizza {
 
-    private String _name;
-    private List<Ingredient> _ingredients;
+    private String name;
+    private List<Ingredient> ingredients;
+    //Quantitée
+    private int number;
+    private String url;
 
-    public List<Ingredient> get_ingredients() {
-        return _ingredients;
+    public String getUrl() {
+        return url;
     }
 
-    public void set_ingredients(List<Ingredient> _ingredients) {
-        this._ingredients = _ingredients;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String get_name() {
-        return _name;
+    public int getNumber() {
+        return number;
     }
 
-    public void set_name(String _name) {
-        this._name = _name;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public Pizza(String name, List<Ingredient> list) {
-        _name = name;
-        _ingredients = list;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Can not have parameteur for serialization
+    public Pizza() {}
+
+    @Override
+    public boolean equals(Object obj) {
+        Pizza pizza = (Pizza) obj;
+        if(pizza.name.equals(name) && pizza.url.equals(url))
+            return true;
+        return false;
+
     }
 }

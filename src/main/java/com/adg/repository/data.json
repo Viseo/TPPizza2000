@@ -1,9 +1,9 @@
-{
-  "pizzas": [
+[
     {
       "name": "FIGUE - CHÈVRE",
       "url": "http://image.dominos.fr/images/pizza/PSFCdetail.png",
-      "ingredient": [
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -44,8 +44,9 @@
     },
     {
       "name": "BOEUF - PÉPPERONI",
-      "url": "",
-      "ingredient": [
+      "url": "http://image.dominos.fr/images/pizza/PSBPdetail.png",
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -83,7 +84,8 @@
     {
       "name": "SAUMON D'ECOSSE",
       "url": "http://image.dominos.fr/images/pizza/PSSEdetail.png",
-      "ingredient": [
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -110,14 +112,15 @@
         },
         {
           "name": "Sauce aneth",
-          "url": "http://pizza.dominos.fr/media/1071/pommes-de-terre.png"
+          "url": "http://pizza.dominos.fr/media/1054/herbes.png"
         }
       ]
     },
     {
       "name": "BACON SAUCE SAVEUR TRUFFE",
       "url": "http://image.dominos.fr/images/pizza/PSBTdetail.png",
-      "ingredient": [
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -147,7 +150,8 @@
     {
       "name": "LA FORESTIÈRE",
       "url": "http://image.dominos.fr/images/pizza/PFORdetail.png",
-      "ingredient": [
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -181,7 +185,8 @@
     {
       "name": "LA CANNIBALE",
       "url": "http://image.dominos.fr/images/pizza/PCANdetail.png",
-      "ingredient": [
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -206,8 +211,9 @@
     },
     {
       "name": "CHICKENITA PEPPERONI",
-      "url": "",
-      "ingredient": [
+      "url": "http://image.dominos.fr/images/pizza/PCHIdetail.png",
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -237,7 +243,8 @@
     {
       "name": "BACON GROOVYI",
       "url": "http://image.dominos.fr/images/pizza/PBCGdetail.png",
-      "ingredient": [
+      "number": 3,
+      "ingredients": [
         {
           "name": "Mozzarella",
           "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
@@ -264,7 +271,5 @@
         }
       ]
     }
-  ],
-  "showPizzaNone": true
-}
+]
 

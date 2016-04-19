@@ -1,31 +1,39 @@
 package com.adg.model;
 
+
+
 /**
  * Created by Edgar on 18/04/2016.
  */
 public class Ingredient {
 
-    private String _name;
-    private String _url;
+    private String name;
+    private String url;
 
-    public String get_url() {
-        return _url;
+    public String getUrl() {
+        return url;
     }
 
-    public void set_url(String _url) {
-        this._url = _url;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String get_name() {
-        return _name;
+    public String getName() {
+        return name;
     }
 
-    public void set_name(String _name) {
-        this._name = _name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Ingredient(String name, String url) {
-        _name = name;
-        _url = url;
+    // Can not have parameteur for serialization
+    public Ingredient() { }
+
+    @Override
+    public boolean equals(Object obj) {
+        Ingredient ingredient = (Ingredient) obj;
+        if(ingredient.name.equals(name) && ingredient.url.equals(url))
+            return true;
+        return false;
     }
 }
