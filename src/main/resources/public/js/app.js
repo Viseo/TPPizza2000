@@ -1,18 +1,357 @@
-/** @jsx React.DOM */
-var ExampleApplication = React.createClass({
-  render: function() {
-    var elapsed = Math.round(this.props.elapsed  / 100);
-    var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0' );
-    var message =
-        'React has been successfully running for ' + seconds + ' seconds.';
 
-    return <p>{message}</p>;
+// Sample static DATA pizza
+var pizzas = [
+  {
+    "name": "FIGUE - CHÈVRE",
+    "url": "http://image.dominos.fr/images/pizza/PSFCdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Oignons",
+        "url": "http://pizza.dominos.fr/media/1064/OIGNON.png"
+      },
+      {
+        "name": "Base Crème Fraîche",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      },
+      {
+        "name": "Fourme d'Ambert",
+        "url": "http://pizza.dominos.fr/media/1050/fromages.png"
+      },
+      {
+        "name": "Chèvre",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      },
+      {
+        "name": "Origan",
+        "url": "http://pizza.dominos.fr/media/1054/herbes.png"
+      },
+      {
+        "name": "Bacon",
+        "url": "http://pizza.dominos.fr/media/1039/bacon.png"
+      },
+      {
+        "name": "Miel",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      },
+      {
+        "name": "Figues Séchées",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      }
+    ]
+  },
+  {
+    "name": "BOEUF - PÉPPERONI",
+    "url": "http://image.dominos.fr/images/pizza/PSBPdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Oignons",
+        "url": "http://pizza.dominos.fr/media/1064/OIGNON.png"
+      },
+      {
+        "name": "Pepperoni",
+        "url": "http://pizza.dominos.fr/media/1066/pepperoni.png"
+      },
+      {
+        "name": "Tomates fraîches",
+        "url": "http://pizza.dominos.fr/media/1077/tomates-fraiches.png"
+      },
+      {
+        "name": "Origan",
+        "url": "http://pizza.dominos.fr/media/1054/herbes.png"
+      },
+      {
+        "name": "Base Sauce barbecue",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      },
+      {
+        "name": "Sauce épicée au piment chipotle et coriandre",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      },
+      {
+        "name": "Bœuf effiloché",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      }
+    ]
+  },
+  {
+    "name": "SAUMON D'ECOSSE",
+    "url": "http://image.dominos.fr/images/pizza/PSSEdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Oignons",
+        "url": "http://pizza.dominos.fr/media/1064/OIGNON.png"
+      },
+      {
+        "name": "Base Crème Fraîche",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      },
+      {
+        "name": "Saumon d'Écosse fumé au bois de hêtre",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      },
+      {
+        "name": "Aneth",
+        "url": "http://pizza.dominos.fr/media/1054/herbes.png"
+      },
+      {
+        "name": "Pommes de terre poêlées",
+        "url": "http://pizza.dominos.fr/media/1071/pommes-de-terre.png"
+      },
+      {
+        "name": "Sauce aneth",
+        "url": "http://pizza.dominos.fr/media/1071/pommes-de-terre.png"
+      }
+    ]
+  },
+  {
+    "name": "BACON SAUCE SAVEUR TRUFFE",
+    "url": "http://image.dominos.fr/images/pizza/PSBTdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Origan",
+        "url": "http://pizza.dominos.fr/media/1054/herbes.png"
+      },
+      {
+        "name": "Base Crème Fraîche",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      },
+      {
+        "name": "Bacon",
+        "url": "http://pizza.dominos.fr/media/1039/bacon.png"
+      },
+      {
+        "name": "Sauce saveur truffe",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      },
+      {
+        "name": "Pommes de terre poêlées",
+        "url": "http://pizza.dominos.fr/media/1071/pommes-de-terre.png"
+      }
+    ]
+  },
+  {
+    "name": "LA FORESTIÈRE",
+    "url": "http://image.dominos.fr/images/pizza/PFORdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Oignons",
+        "url": "http://pizza.dominos.fr/media/1064/OIGNON.png"
+      },
+      {
+        "name": "Base Crème Fraîche",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      },
+      {
+        "name": "Champignons",
+        "url": "http://pizza.dominos.fr/media/1044/champignons.png"
+      },
+      {
+        "name": "Jambon",
+        "url": "http://pizza.dominos.fr/media/1055/jambon.png"
+      },
+      {
+        "name": "Lardons",
+        "url": "http://pizza.dominos.fr/images/lf.png"
+      },
+      {
+        "name": "Origan",
+        "url": "http://pizza.dominos.fr/media/1054/herbes.png"
+      }
+    ]
+  },
+  {
+    "name": "LA CANNIBALE",
+    "url": "http://image.dominos.fr/images/pizza/PCANdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Bœuf Epicé",
+        "url": "http://image.dominos.fr/images/pizza/PCANdetail.png"
+      },
+      {
+        "name": "Merguez",
+        "url": "http://pizza.dominos.fr/media/1059/merguez.png"
+      },
+      {
+        "name": "Poulet rôti",
+        "url": "http://pizza.dominos.fr/media/1072/poulet.png"
+      },
+      {
+        "name": "Base Sauce barbecue",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      }
+    ]
+  },
+  {
+    "name": "CHICKENITA PEPPERONI",
+    "url": "http://image.dominos.fr/images/pizza/PCHIdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Base sauce Tomate",
+        "url": "http://pizza.dominos.fr/media/1075/sauce-tomate.png"
+      },
+      {
+        "name": "Pepperoni",
+        "url": "http://pizza.dominos.fr/media/1066/pepperoni.png"
+      },
+      {
+        "name": "Emmental",
+        "url": "http://pizza.dominos.fr/media/1050/fromages.png"
+      },
+      {
+        "name": "Poulet rôti",
+        "url": "http://pizza.dominos.fr/media/1072/poulet.png"
+      },
+      {
+        "name": "Tomates fraîches",
+        "url": "http://pizza.dominos.fr/media/1077/tomates-fraiches.png"
+      }
+    ]
+  },
+  {
+    "name": "BACON GROOVYI",
+    "url": "http://image.dominos.fr/images/pizza/PBCGdetail.png",
+    "ingredient": [
+      {
+        "name": "Mozzarella",
+        "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+      },
+      {
+        "name": "Oignons",
+        "url": "http://pizza.dominos.fr/media/1064/OIGNON.png"
+      },
+      {
+        "name": "Base Crème Fraîche",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      },
+      {
+        "name": "Sauce barbecue",
+        "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+      },
+      {
+        "name": "Poulet rôti",
+        "url": "http://pizza.dominos.fr/media/1072/poulet.png"
+      },
+      {
+        "name": "Bacon",
+        "url": "http://pizza.dominos.fr/media/1039/bacon.png"
+      }
+    ]
+  }
+];
+// Sample static DATA ingredients
+var ingredients = [
+  {
+    "name": "Mozzarella",
+    "url": "http://pizza.dominos.fr/media/1078/Mozzarella.png"
+  },
+  {
+    "name": "Oignons",
+    "url": "http://pizza.dominos.fr/media/1064/OIGNON.png"
+  },
+  {
+    "name": "Base Crème Fraîche",
+    "url": "http://pizza.dominos.fr/media/1074/sauces.png"
+  },
+  {
+    "name": "Fourme d'Ambert",
+    "url": "http://pizza.dominos.fr/media/1050/fromages.png"
+  },
+  {
+    "name": "Chèvre",
+    "url": "http://pizza.dominos.fr/images/lf.png"
+  },
+  {
+    "name": "Origan",
+    "url": "http://pizza.dominos.fr/media/1054/herbes.png"
+  },
+  {
+    "name": "Bacon",
+    "url": "http://pizza.dominos.fr/media/1039/bacon.png"
+  },
+  {
+    "name": "Miel",
+    "url": "http://pizza.dominos.fr/images/lf.png"
+  },
+  {
+    "name": "Figues Séchées",
+    "url": "http://pizza.dominos.fr/images/lf.png"
+  }
+];
+
+var Pizza = React.createClass({
+
+  render: function() {
+
+    return <div>{this.props.items.map(function (item, index) {
+      console.log(item);
+      return (<div className="span4" key={index}>
+          <h2>{item.name}</h2>
+      <img src={item.url}/>
+      </div>)
+    })}</div>
+
+    ;
   }
 });
-var start = new Date().getTime();
-setInterval(function() {
-  ReactDOM.render(
-  <ExampleApplication elapsed={new Date().getTime() - start} />,
-      document.getElementById('item1')
-  );
-}, 50);
+
+var Ingredients = React.createClass({
+  getInitialState : function(){
+    return  {pizzas : pizzas};
+  },
+  handleInputCounter : function (e) {
+    this.setState({counter: e.target + this.state.counter})
+  },
+  render : function () {
+
+    return <ul >{this.props.items.map(function (item, index) {
+      return <li key={index} class={item.name}>{item.name}</li>
+    })}</ul>
+
+  }
+
+});
+
+
+ReactDOM.render(
+
+<Pizza  items={pizzas}/>,
+    document.getElementById('pizzas')
+);
+
+
+
+ReactDOM.render(
+<Ingredients  items={ingredients} />,
+    document.getElementById('ingredients')
+
+);
+
+
