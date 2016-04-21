@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -32,8 +33,8 @@ public class JsonReader {
         this._pizzas = _pizzas;
     }
 
-    //@Value("${json.config.folder}")
-    String _jsonFolder="/Users/Edgar/VISEO/miniProjet/TPPizza2000/src/main/java/com/adg/repository/data.json";
+    @Value("${json.config.folder}")
+    private String _jsonFolder;
 
     /**
      * Init data type _pizzas from the json file

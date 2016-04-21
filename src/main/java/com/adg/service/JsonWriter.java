@@ -6,6 +6,7 @@ import com.adg.model.Pizza;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -16,13 +17,8 @@ import java.util.List;
  */
 public class JsonWriter {
 
-//    // Serialization
-//    BagOfPrimitives obj = new BagOfPrimitives();
-//    Gson gson = new Gson();
-//    String json = gson.toJson(obj);
-
-    //@Value("${json.config.folder}")
-    private  String _jsonFolder="/Users/Edgar/VISEO/miniProjet/TPPizza2000/src/main/java/com/adg/repository/data.json";
+    @Value("${json.config.folder}")
+    private  String _jsonFolder;
 
     public JsonReader get_reader() {
         return _reader;
