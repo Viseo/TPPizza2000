@@ -1,13 +1,11 @@
 package com.adg.model;
 
-import com.adg.service.JsonReader;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
  * Created by Edgar on 19/04/2016.
- *
+ * <p>
  * Creat a pizza with ingredient
  */
 public class Cooker {
@@ -39,22 +37,23 @@ public class Cooker {
 
     /**
      * if you can cook the pizza update the data.json +1 for the corresponding pizza
+     *
      * @return true if you have ingredient for cook the pizza false otherwise
      */
     public boolean cookPizza() {
-
-        try {
-            JsonReader jr = new JsonReader();
-            List<Ingredient> ingredientsneeded = jr.getIngredientOf(pizza);
-            for (Ingredient ingredient:ingredientsneeded ) {
-                if (!ingredients.contains(ingredient))
-                    return false;
-            }
-            //We have all the ingredients
-            //TODO: incrementer pizza
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//
+//        try {
+////            JsonReader jr = new JsonReader();
+////            List<Ingredient> ingredientsneeded = jr.getIngredientOf(pizza);
+////            for (Ingredient ingredient:ingredientsneeded ) {
+////                if (!ingredients.contains(ingredient))
+////                    return false;
+////            }
+////            //We have all the ingredients
+////            //TODO: incrementer pizza
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         return true;
     }
