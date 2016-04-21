@@ -6,6 +6,7 @@ import com.adg.model.Pizza;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
@@ -17,9 +18,6 @@ import java.util.List;
  */
 public class JsonWriter {
 
-    @Value("${json.config.folder}")
-    private  String _jsonFolder;
-
     public JsonReader get_reader() {
         return _reader;
     }
@@ -29,6 +27,9 @@ public class JsonWriter {
     }
 
     private JsonReader _reader;
+
+    @Autowired
+    private PizzaService pizzaService;
 
     /**
      * Creat a json writer
@@ -61,7 +62,7 @@ public class JsonWriter {
         Writer writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(_jsonFolder), "utf-8"));
+                    new FileOutputStream(pizzaService.jsonConfigFolder), "utf-8"));
             writer.write(json);
         } catch (IOException ex) {
             return false;
