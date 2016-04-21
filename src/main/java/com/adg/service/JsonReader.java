@@ -7,15 +7,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * Created by Edgar on 18/04/2016.
@@ -33,26 +36,16 @@ public class JsonReader {
         this._pizzas = _pizzas;
     }
 
-    @Value("${json.config.folder}")
-    private String _jsonFolder;
+    @Autowired
+    private PizzaService pizzaService;
 
     /**
      * Init data type _pizzas from the json file
      * @throws IOException
      */
     public JsonReader() throws IOException {
-        _pizzas = new ArrayList<Pizza>();
-        FileInputStream fisTargetFile = new FileInputStream(new File(_jsonFolder));
-
-        String targetFileStr = IOUtils.toString(fisTargetFile, "UTF-8");
-
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Ingredient.class, new IngregientInstanceCreator());
-        Gson gson = gsonBuilder.create();
-
-        Type fooType = new TypeToken<List<Pizza>>() {}.getType();
-        _pizzas = gson.fromJson(targetFileStr, fooType);
-
+//        _pizzas = new ArrayList<Pizza>();
+//        _pizzas = pizzaService.getPizzas();
     }
 
     /**
