@@ -1,6 +1,8 @@
 package com.adg.model;
 
 import com.adg.service.JsonReader;
+import com.adg.service.PizzaService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.List;
  * Creat a pizza with ingredient
  */
 public class Cooker {
+
+    @Autowired
+    private PizzaService pizzaService;
 
     private Pizza pizza;
     private List<Ingredient> ingredients;
@@ -43,19 +48,18 @@ public class Cooker {
      */
     public boolean cookPizza() {
 
-        try {
-            JsonReader jr = new JsonReader();
-            List<Ingredient> ingredientsneeded = jr.getIngredientOf(pizza);
-            for (Ingredient ingredient:ingredientsneeded ) {
-                if (!ingredients.contains(ingredient))
-                    return false;
-            }
-            //We have all the ingredients
-            //TODO: incrementer pizza
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<Ingredient> ingredientsneeded = pizzaService.getIngredientOf(pizza);
+        for (Ingredient ingredient:ingredientsneeded ) {
+            if (!ingredients.contains(ingredient))
+                return false;
         }
-
+        //We have all the ingredients
+        pizza.setNumber(pizza.getNumber()+1);
+        try {
+            pizzaService.updatePizza(pizza);
+        } catch (IOException e) {
+            return false;
+        }
         return true;
     }
 }
