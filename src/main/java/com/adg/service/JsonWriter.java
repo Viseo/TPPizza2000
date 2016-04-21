@@ -18,7 +18,7 @@ import java.util.List;
 public class JsonWriter {
 
     @Value("${json.config.folder}")
-    private  String _jsonFolder;
+    private  String _jsonFolder = "/Users/Edgar/VISEO/miniProjet/TPPizza2000/src/main/java/com/adg/repository/data.json";
 
     public JsonReader get_reader() {
         return _reader;

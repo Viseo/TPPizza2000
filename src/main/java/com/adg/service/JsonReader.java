@@ -7,7 +7,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -42,6 +44,9 @@ public class JsonReader {
      */
     public JsonReader() throws IOException {
         _pizzas = new ArrayList<Pizza>();
+
+        System.out.print("COUCOCU" + _jsonFolder);
+
         FileInputStream fisTargetFile = new FileInputStream(new File(_jsonFolder));
 
         String targetFileStr = IOUtils.toString(fisTargetFile, "UTF-8");
@@ -85,10 +90,13 @@ public class JsonReader {
             List<Ingredient> ings = piz.getIngredients();
             //parcourire tous les ingedients de chaques pizza
             for ( Ingredient i : ings) {
-                if(!ingredients.contains(i))
+                if(!ingredients.contains(i)){
                     ingredients.add(i);
+                }
+
             }
         }
+
         return ingredients;
     }
 
