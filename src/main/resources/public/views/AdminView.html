@@ -7,6 +7,18 @@
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="../css/style.css">
+
+    <script language="javascript">
+        var valeur=50;
+        function modifier(increment) {
+                valeur += increment;
+                document.getElementById('text').value = valeur;
+        }
+    </script>
+    <script language="javascript">
+        document.getElementById('text').value=valeur;
+    </script>
+
 </head>
 <body>
 <div class="container-fluid">
@@ -27,28 +39,30 @@
                     <thead>
                     <tr>
 
-                        <th>Ingredient</th>
-                        <th>Nombre</th>
-                        <th>Edit</th>
+                        <th align="center">Ingredient</th>
+                        <th align="center">Nombre</th>
+                        <th align="center">Edit</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <tr id="item1">
-                        <td id="name1">Mozarella</td>
-                        <td id="nombre1">20</td>
-                        <td><button id="pl1" type="button" class="btn btn-style">+</button> <button id="mn1" type="button" class="btn btn-style">-</button></td>
+                        <td id="name1">Mozarella
+                        </td>
+                        <td><input type="text" id="text" value="50" class="input-sizeAdmin" readonly="true" > </td>
+                        <td><button id="pl1" type="button" class="btn btn-style" value="+1" onClick="modifier(+1)">+</button> <button id="mn1" type="button" class="btn btn-style" value="-1" onClick="modifier(-1)">-</button>
+                        </td>
 
                     </tr>
                     <tr id="item2">
                         <td id="name2">Tomate</td>
-                        <td id="nombre2">16</td>
-                        <td><button id="pl2" type="button" class="btn btn-style">+</button> <button id="mn2" type="button" class="btn btn-style">-</button></td>
-                    </tr>
+                        <td id="nombre2">8</td>
+                        <td><button id="pl2" type="button" class="btn btn-style" >+</button> <button id="mn2" type="button" class="btn btn-style">-</button></td>
+                    </tr>0
                     <tr id="item3">
                         <td id="name3">Thon</td>
-                        <td id="nombre3">8</td>
-                        <td><button id="pl3" type="button" class="btn btn-style">+</button> <button id="mn3" type="button" class="btn btn-style">-</button></td>
+                        <td id="nombre3">5</td>
+                        <td><button id="pl" type="button" class="btn btn-style">+</button> <button id="mn3" type="button" class="btn btn-style">-</button></td>
 
                     </tr>
                     </tbody>

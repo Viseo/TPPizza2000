@@ -22,3 +22,9 @@ button#plus{
 .distance {
     margin-top: 0.3cm;
 }
+
+.input-sizeAdmin{
+    border:none;
+    width: 20px;
+
+}
