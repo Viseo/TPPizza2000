@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Edgar on 18/04/2016.
  */
 @RestController
-@RequestMapping("/pizza")
+@RequestMapping("/admin")
 public class HomeController {
 
     @Autowired
@@ -25,6 +25,11 @@ public class HomeController {
     @RequestMapping(value = "pizza", method = RequestMethod.GET)
     public List<Pizza> getpizza() {
         return pizzaService.getAllTypeOfPizza();
+    }
+
+    @RequestMapping(value = "ingredient", method = RequestMethod.GET)
+    public List<Ingredient> getIngredients() {
+        return pizzaService.getAllTypeOfIngredient();
     }
 
     @RequestMapping(value = "pizza", method = RequestMethod.POST)

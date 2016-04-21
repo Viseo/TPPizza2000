@@ -8,17 +8,6 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="../css/style.css">
 
-    <script language="javascript">
-        var valeur=50;
-        function modifier(increment) {
-                valeur += increment;
-                document.getElementById('text').value = valeur;
-        }
-    </script>
-    <script language="javascript">
-        document.getElementById('text').value=valeur;
-    </script>
-
 </head>
 <body>
 <div class="container-fluid">
@@ -58,7 +47,7 @@
                         <td id="name2">Tomate</td>
                         <td id="nombre2">8</td>
                         <td><button id="pl2" type="button" class="btn btn-style" >+</button> <button id="mn2" type="button" class="btn btn-style">-</button></td>
-                    </tr>0
+                    </tr>
                     <tr id="item3">
                         <td id="name3">Thon</td>
                         <td id="nombre3">5</td>
@@ -75,13 +64,19 @@
                     <h3>FIGUE - CHEVRE</h3>
                     <img src="http://image.dominos.fr/images/pizza/PSFCdetail.png" alt="CHEVRE"class="imagepizza" >
 
-                    <p><button id="plus1" type="button" class="btn btn-style">+</button> <button id="moins1" type="button" class="btn btn-style">-</button></p>
+                    <p>
+                        <button id="plus1" type="button" class="btn btn-style">+</button>
+                        <button id="moins1" type="button" class="btn btn-style">-</button>
+                    </p>
                 </div><!--/span-->
                 <div class="span4">
                     <h3>BOEUF - PEPPERONI</h3>
                     <img src="http://image.dominos.fr/images/pizza/PSBPdetail.png" alt="PEPPERONI" class="imagepizza">
 
-                    <p><button id="plus2" type="button" class="btn btn-style">+</button> <button id="moins2" type="button" class="btn btn-style">-</button></p>
+                    <p>
+                        <button id="plus2" type="button" class="btn btn-style">+</button>
+                        <button id="moins2" type="button" class="btn btn-style">-</button>
+                    </p>
                 </div><!--/span-->
                 <div class="span4">
                     <h3>SAUMON D'ECOSSE</h3>
@@ -115,5 +110,15 @@
 </div>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script language="javascript">
+    var valeur=50;
+    function modifier(increment) {
+        valeur += increment;
+        document.getElementById('text').value = valeur;
+    }
+</script>
+<script language="javascript">
+    document.getElementById('text').value=valeur;
+</script>
 </body>
 </html>
