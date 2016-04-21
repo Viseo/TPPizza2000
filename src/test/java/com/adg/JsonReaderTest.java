@@ -200,14 +200,18 @@ public class JsonReaderTest {
             ingredient27.setName("Emmental");
             ingredient27.setUrl("http://pizza.dominos.fr/media/1050/fromages.png");
             ingredientsSupose.add(ingredient27);
+            Ingredient ingredient28 = new Ingredient();
+            ingredient28.setName("Sauce barbecue");
+            ingredient28.setUrl("http://pizza.dominos.fr/media/1074/sauces.png");
+            ingredientsSupose.add(ingredient27);
 
             //Assert size
-//            assertEquals(ingredientsSupose.size(), ingredients.size());
+            assertEquals(ingredientsSupose.size(), ingredients.size());
             //Assert content
-//            for (int i = 0; i < ingredients.size(); ++i) {
-//                if (!ingredients.contains(ingredientsSupose.get(i)))
-//                    assertEquals(ingredientsSupose.get(i).getName(), ingredients.get(i).getName());
-//            }
+            for (int i = 0; i < ingredients.size(); ++i) {
+                if (!ingredients.contains(ingredientsSupose.get(i)))
+                    assertEquals(ingredientsSupose.get(i).getName(), ingredients.get(i).getName());
+            }
 
         } catch (IOException e) {
             assertEquals(1,2);
