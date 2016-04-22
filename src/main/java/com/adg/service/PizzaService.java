@@ -123,7 +123,7 @@ public class PizzaService {
 
         for (Pizza pizza: _pizzas ) {
             if (pizzaToUpdate.getName().equals(pizza.getName()))
-                pizza.setNumber(pizzaToUpdate.getNumber());
+                pizza.setNumber(pizzaToUpdate.getNumber()); // put the pizzaToUpdate number in pizza
         }
 
         GsonBuilder gsonBuilder = new GsonBuilder();

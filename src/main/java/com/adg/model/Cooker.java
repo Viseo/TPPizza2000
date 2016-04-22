@@ -36,9 +36,22 @@ public class Cooker {
         this.ingredients = ingredients;
     }
 
+    /**
+     * Cooker for making a pizza
+     * @param pizzaToDo
+     * @param ingredientForPizza
+     */
     public Cooker(Pizza pizzaToDo, List<Ingredient> ingredientForPizza) {
         pizza = pizzaToDo;
         ingredients = ingredientForPizza;
+    }
+
+    /**
+     * Cooker for buying a pizza
+     * @param pizzaToDo
+     */
+    public Cooker(Pizza pizzaToDo) {
+        pizza = pizzaToDo;
     }
 
 
@@ -63,5 +76,24 @@ public class Cooker {
         return true;
     }
 
-    //TODO: buy pizza
+    /**
+     * if you can by a pizza update the data.json - 1 for the corresponding pizza
+     * @return true if pizza existe en pizza number > 0  false otherwise
+     */
+    public boolean buyPizza() {
+
+        for (Pizza piz: pizzaService.getAllTypeOfPizza()) {
+            if (piz.getName().equals(pizza.getName()) && piz.getNumber() > 0) {
+                piz.setNumber(piz.getNumber()-1);
+                try {
+                    pizzaService.updatePizza(piz);
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return false;
+    }
 }
