@@ -1,10 +1,11 @@
+
 button#plus{
     margin-right: 20px;
 }
 
 .imagepizza{
     height: 50%;
-    width: 50%;
+    width:  50%;
 }
 
 .btn-style {
@@ -26,5 +27,21 @@ button#plus{
 .input-sizeAdmin{
     border:none;
     width: 20px;
+}
+
+#ingredients{
+    background: url("../images/background_repeat.png") repeat;
+
+}
+.list-group, .list-group-item
+{
+    background-color: inherit;
+    width: 180px;
+}
+#ingredients .description{
+    font-family: "Indie Flower", Arial, sans;
+    font-size :1.5em;
+}
+.img-ingredient{
 
 }
