@@ -1,3 +1,8 @@
+header {
+    background-color: #D8D8D8;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
 
 button#plus{
     margin-right: 20px;
@@ -6,6 +11,7 @@ button#plus{
 .imagepizza{
     height: 50%;
     width:  50%;
+
 }
 .imagepizza-ronde{
     height: 45%;
@@ -19,10 +25,98 @@ button#plus{
     border-color: #EA4E5C;
     background: none;
 }
-
 .btn-style:hover{
     background: #E5848D;
     color: white;
+}
+.btn-style-invers{
+    color: white;
+    border: solid 2px;
+    border-color: #EA4E5C;
+    background: #EA4E5C;
+}
+.btn-style-invers:hover{
+    color: #EA4E5C;
+    border: solid 2px;
+    border-color: #EA4E5C;
+    background: none;
+}
+
+
+/**  PANNIER  **/
+.pannier {
+    margin-top: 13px;
+}
+.pannier:hover{
+    cursor: pointer;
+}
+.popover {
+    width: 600px;
+    background-color: rgba(255, 255, 255, 0.90);
+    border: solid 1px;
+    border-color: #EA4E5C;
+}
+.popover-content {
+    border: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    box-shadow: none;
+}
+.popover-footer {
+    margin: 0;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    background-color: rgba(248, 248, 248, 0.94);
+    border-bottom: 1px solid #EBEBEB;
+    border-radius: 5px 5px 0 0;
+}
+.popover-title{
+    background-color: rgba(248, 248, 248, 0.94);
+    margin-bottom: 10px;
+}
+#notification {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    background-color: #f21313;
+    position: absolute;
+    margin-top: 12px;
+    margin-left: -8px;
+    text-align: center;
+    padding: 2px 0px 0px 0px;
+    font-size: 14px;
+    color: #ffffff;
+}
+.notification-show {
+    display: inherit;
+}
+.notification-hide{
+    display: none;
+}
+.anim {
+    -moz-animation-name: notification-anim;
+    -moz-animation-duration: 1.5s;
+    -webkit-animation-name: notification-anim; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 1.5s; /* Chrome, Safari, Opera */
+    animation-name: notification-anim;
+    animation-duration: 1.5s;
+
+}
+@-moz-keyframes notification-anim {
+    from {top: -20px;}
+    to {top: 0px;}
+}
+@-webkit-keyframes notification-anim {
+    from {top: -20px;}
+    to {top: 0px;}
+}
+@keyframes notification-anim {
+    from {top: -20px;}
+    to {top: 0px;}
 }
 
 .distance {
