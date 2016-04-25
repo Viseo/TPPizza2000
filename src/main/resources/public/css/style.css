@@ -7,6 +7,11 @@ button#plus{
     height: 50%;
     width:  50%;
 }
+.imagepizza-ronde{
+    height: 45%;
+    width: 45%;
+    margin-bottom: 10px;
+}
 
 .btn-style {
     color: #EA4E5C;
