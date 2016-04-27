@@ -174,3 +174,13 @@ button#plus{
     line-height: 1.428571429;
     border-radius: 15px;
 }
+.ingredient{
+    margin-bottom: 5px;
+}
+.plus, .minus{
+    margin-top: 5px;
+}
+.img-ingredient{
+    width: 10%;
+    height: 10%;
+}

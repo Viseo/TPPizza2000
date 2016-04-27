@@ -7,9 +7,9 @@ var ElemPizza = React.createClass({
         return {data: []};
     },
     render : function () {
-        return <div className="col-md-4 text-center">
+        return <div className="col-md-4 text-center pizza">
                  <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.props.number}</button></h3><img className="imagepizza" src={this.props.url}/>
-                <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">+</button><button  className="btn btn-style">-</button></div>
+                <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button></div>
         </div>
     },
     onChange : function () {
@@ -71,9 +71,12 @@ var Pizza = React.createClass({
 });
 
 var ElemIngredient = React.createClass({
-
+    getInitialState : function(){
+        return {data: [], count:0};
+    },
     onAdd : function (props) {
         // Add ingredient in memory stock
+        this.setState({count:this.state.count+1});
         var ingredient = {};
         ingredient.name = props.name;
         ingredient.quantite = 1;
@@ -81,23 +84,25 @@ var ElemIngredient = React.createClass({
         console.log(tmpIngredients);
     },
     onMinus : function (props) {
+
+        if(this.state.count>0)
+            this.setState({count:this.state.count-1});
         // Add ingredient in memory stock
         var elem = tmpIngredients.find(function(elem){
             return elem.name == props.name;
         });
         var index = tmpIngredients.indexOf(elem);
-        tmpIngredients.splice(index, 1);
+        if(elem)tmpIngredients.splice(index, 1);
         console.log(tmpIngredients);
     },
 
     render : function () {
-
-
-        return <div key={this.props.name}  className="row">
+        return <div key={this.props.name}  className="row ingredient">
             <img src={this.props.url} className="img-ingredient col-md-1"/>
-            <div    className="col-md-4 description">{this.props.name}</div>
-            <span className="quantite">{ }</span>
+            <div    className="col-md-5 description">{this.props.name}</div>
+
             <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 plus" >+</button>
+            <button className="btn btn-style-2 btn-circle btn-lg col-md-1">{this.state.count}</button>
             <button onClick={this.onMinus.bind(this, this.props)}className="btn btn-style col-md-1 minus">-</button>
         </div>
     }
