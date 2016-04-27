@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Cooker {
 
-    @Autowired
     private PizzaService pizzaService;
 
     private Pizza pizza;
@@ -41,7 +40,8 @@ public class Cooker {
      * @param pizzaToDo
      * @param ingredientForPizza
      */
-    public Cooker(Pizza pizzaToDo, List<Ingredient> ingredientForPizza) {
+    public Cooker(Pizza pizzaToDo, List<Ingredient> ingredientForPizza, PizzaService pizzaServ) {
+        pizzaService = pizzaServ;
         pizza = pizzaToDo;
         ingredients = ingredientForPizza;
     }
@@ -50,8 +50,9 @@ public class Cooker {
      * Cooker for buying a pizza
      * @param pizzaToDo
      */
-    public Cooker(Pizza pizzaToDo) {
+    public Cooker(Pizza pizzaToDo, PizzaService pizzaSer) {
         pizza = pizzaToDo;
+        pizzaService = pizzaSer;
     }
 
 

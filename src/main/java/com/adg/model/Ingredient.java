@@ -32,7 +32,7 @@ public class Ingredient {
     @Override
     public boolean equals(Object obj) {
         Ingredient ingredient = (Ingredient) obj;
-        if(ingredient.name.equals(name) && ingredient.url.equals(url))
+        if(ingredient.name.equals(name) )
             return true;
         return false;
     }

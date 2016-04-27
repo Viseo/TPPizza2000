@@ -122,8 +122,10 @@ public class PizzaService {
         final File pizzaData = resourceLoader.getResource("classpath:" + jsonConfigFolder).getFile();
 
         for (Pizza pizza: _pizzas ) {
-            if (pizzaToUpdate.getName().equals(pizza.getName()))
+            if (pizzaToUpdate.getName().equals(pizza.getName())) {
                 pizza.setNumber(pizzaToUpdate.getNumber()); // put the pizzaToUpdate number in pizza
+                break;
+            }
         }
 
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -134,10 +136,10 @@ public class PizzaService {
 
         Writer writer = null;
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(pizzaData), "utf-8"));
+            writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream(pizzaData), "utf-8") );
             writer.write(json);
         } catch (IOException ex) {
+            ex.printStackTrace();
             return false;
         } finally {
             try {writer.close();} catch (Exception ex) {return false;}

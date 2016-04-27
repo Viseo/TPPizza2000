@@ -2,10 +2,14 @@ package com.adg.controller;
 
 import com.adg.model.Cooker;
 import com.adg.model.Ingredient;
+import com.adg.model.IngregientInstanceCreator;
 import com.adg.model.Pizza;
 import com.adg.service.JsonReader;
 import com.adg.service.PizzaService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -43,14 +48,22 @@ public class HomeController {
 
     @RequestMapping(value = "cooker", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-
     public Boolean coockPizza(@RequestBody ObjectNode requete) {
 
 
-        System.out.println(requete.get("ingredient").getClass());
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Ingredient.class, new IngregientInstanceCreator());
+        Gson gson = gsonBuilder.create();
 
+        Pizza pizzas = gson.fromJson(requete.get("pizza").toString(), Pizza.class);
 
-        return false;
+        Type fooType = new TypeToken<List<Ingredient>>() {}.getType();
+        gson = new Gson();
+        List<Ingredient> ingredients = gson.fromJson(requete.get("ingredient").toString(), fooType);
+
+        Cooker cooker = new Cooker(pizzas, ingredients, pizzaService);
+
+        return cooker.cookPizza();
     }
 
 
