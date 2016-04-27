@@ -3,7 +3,9 @@ header {
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
-
+body{
+    font-family: "Indie Flower", Arial, sans;
+}
 button#plus{
     margin-right: 20px;
 }
@@ -138,9 +140,13 @@ button#plus{
     width: 180px;
 }
 #ingredients .description{
-    font-family: "Indie Flower", Arial, sans;
+
     font-size :1.5em;
 }
 .img-ingredient{
 
+}
+.list-pizzas, .btn-preparer{
+    height: 3.3em;
+    font-size: 1.5em;
 }
