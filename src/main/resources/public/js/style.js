@@ -7,13 +7,13 @@ $("#pannier-container").popover({
         trigger : 'click',
         placement : 'bottom',
         html: 'true',
-        title:'Pannier',
+        title:'<h5 align="center">Pannier</h5>',
         content : '',
         template:
         '<div class="popover"><div class="arrow"></div>'+
         '<h2 class="popover-title"></h2><div class="popover-content">'+
 
-        '</div><div class="popover-footer"><button type="button"  class="btn btn-style-invers popover-submit">'+
+        '</div><div class="popover-footer text-center"><button type="button" class="btn btn-style-invers popover-submit">'+
         '<i class="fa fa-check" aria-hidden="true"></i> Valider </button>&nbsp;&nbsp;'+
 
         '<button type="button" id="popover-cancel" class="btn btn-default popover-cancel">'+
@@ -38,7 +38,7 @@ $("#pannier-container").popover({
 
             _pizzas.forEach(function(pizzaName) {
                 if (pizzas.length === 0 ){
-                    pizzas.push({name: pizzaName, number:1});
+                    pizzas.push({name: pizzaName, number:0});
                 }
                  pizzas.forEach(function (pizza) {
                      if (pizzaName === pizza.name) {
