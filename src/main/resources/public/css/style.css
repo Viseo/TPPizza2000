@@ -43,6 +43,13 @@ button#plus{
     border-color: #EA4E5C;
     background: none;
 }
+.btn-style-2 {
+    color: #51a351;
+    border: solid 2px;
+    border-color: #51a351;
+    background: none;
+    cursor: inherit;
+}
 
 
 /**  PANNIER  **/
@@ -149,4 +156,21 @@ button#plus{
 .list-pizzas, .btn-preparer{
     height: 3.3em;
     font-size: 1.5em;
+}
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 13px 13px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
 }
