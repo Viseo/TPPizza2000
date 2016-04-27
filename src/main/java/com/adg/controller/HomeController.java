@@ -50,7 +50,6 @@ public class HomeController {
     @ResponseStatus(HttpStatus.CREATED)
     public Boolean coockPizza(@RequestBody ObjectNode requete) {
 
-
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Ingredient.class, new IngregientInstanceCreator());
         Gson gson = gsonBuilder.create();
@@ -66,5 +65,19 @@ public class HomeController {
         return cooker.cookPizza();
     }
 
+    @RequestMapping(value = "buyPizza", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public Boolean buyPizza(@RequestBody ObjectNode requete) {
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Ingredient.class, new IngregientInstanceCreator());
+        Gson gson = gsonBuilder.create();
+
+        Pizza pizzas = gson.fromJson(requete.get("pizza").toString(), Pizza.class);
+
+        Cooker cooker = new Cooker(pizzas, pizzaService);
+
+        return cooker.buyPizza();
+    }
 
 }
