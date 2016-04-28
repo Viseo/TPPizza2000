@@ -42,6 +42,7 @@ public class CookerTest {
         ingredient2.setName("Chèvre");
         ingredient2.setUrl("http://pizza.dominos.fr/images/lf.png");
         ingredients.add(ingredient2);
+        Ingredient ingredient7 = new Ingredient();
 
        // Cooker ck = new Cooker(pizza, ingredients);
         //assertEquals(false, ck.cookPizza());

@@ -5,6 +5,7 @@ import com.adg.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,6 +77,21 @@ public class Cooker {
         }
         return true;
     }
+
+    /* If you don't put all ingredients for creating the pizza,
+    *
+    * */
+
+    public List<Ingredient> indispoIng (List<Ingredient> IngN){
+        List<Ingredient> ingredientN = pizzaService.getIngredientOf(pizza);
+        for (Ingredient ingredient:ingredientN ) {
+            if (ingredientN != IngN){
+
+            }
+        }
+                return indispoIng(ingredientN);
+    }
+
 
     /**
      * if you can by a pizza update the data.json - 1 for the corresponding pizza
