@@ -6,10 +6,8 @@ var ElemPizza = React.createClass({
         return {data: []};
     },
     render : function () {
-        return <div className="col-md-6 text-center pizza">
-                 <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.props.number}</div></h3>
-                    <img className="imagepizza" src={this.props.url}/>
-                    
+        return <div className="col-md-6 text-center pizza" id={this.props.indexP}>
+                 <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.props.number}</div></h3><img className="imagepizza" src={this.props.url}/>
                 <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button></div>
         </div>
     },
@@ -95,7 +93,9 @@ var Pizza = React.createClass({
     render: function() {
         // Generation of virtual DOM row pizza
         return <div>{this.state.pizzas.map(function (item, index) {
-            return <ElemPizza key={item.name} name={item.name} number={item.number} ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker" index={index}/>
+            return <ElemPizza key={item.name} name={item.name} number={item.number}
+                              ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker"
+                              index={index} indexP={'id-pizza-'+index}/>
         })}</div>;
     }
 });
@@ -111,7 +111,8 @@ var ElemIngredient = React.createClass({
         ingredient.name = props.name;
         ingredient.quantite = 1;
         tmpIngredients = tmpIngredients.concat(ingredient);
-        console.log(tmpIngredients);
+
+        jsonCanCook();
     },
     onMinus : function (props) {
 
@@ -123,16 +124,18 @@ var ElemIngredient = React.createClass({
         });
         var index = tmpIngredients.indexOf(elem);
         if(elem)tmpIngredients.splice(index, 1);
-        console.log(tmpIngredients);
+
+        jsonCanCook();
     },
 
     render : function () {
-        return <div key={this.props.name}  className="row ingredient vcenter">
-            <img src={this.props.url} className="img-ingredient col-md-3 vcenter"/>
-            <div  className="col-md-5 description vcenter">{this.props.name}</div>
-            <div className="btn btn-style-2 btn-circle btn-lg col-md-1 vcenter" >{this.state.count}</div>
-            <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins vcenter" >+</button>
-            <button onClick={this.onMinus.bind(this, this.props)}className="btn btn-style col-md-1 btn-plus-moins vcenter">-</button>
+        return <div key={this.props.name}  className="row ingredient ">
+            <img src={this.props.url} className="img-ingredient col-md-3 "/>
+            <div  className="col-md-5 description ">{this.props.name}</div>
+            <div className="btn btn-style-2 btn-circle btn-lg col-md-1 " >{this.state.count}</div>
+
+            <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins " >+</button>
+            <button onClick={this.onMinus.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins ">-</button>
         </div>
     }
 });
@@ -195,3 +198,48 @@ ReactDOM.render(
     <Ingredients   source="http://localhost:8080/admin/ingredient"/>,
     document.getElementById('ingredients')
 );
+
+
+function jsonCanCook() {
+
+    if (getCookie("toogleIsSelected") === "false") {return;}
+    
+    var dataToSend = tmpIngredients.map(function (obj) { return {name: obj.name, url: ''}  });
+    var data = {"ingredient" :dataToSend};
+
+     $.ajax({
+        url : "http://localhost:8080/admin/cancook",
+        contentType:'application/json',
+        type: 'POST',
+        data:   JSON.stringify(data),
+        dataType : 'json',
+        success : function (data) {
+            var pizzas = document.getElementsByClassName("pizza");
+            pizzas.forEach(function () {
+                
+            });
+            'id-pizza-'
+            
+        },
+        error : function(xhr, status, err){
+            console.log(err);
+            
+        }
+    });
+}
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}

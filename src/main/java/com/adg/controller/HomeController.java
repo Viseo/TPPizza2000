@@ -45,6 +45,19 @@ public class HomeController {
         return pizzaService.getAllTypeOfIngredient();
     }
 
+    @RequestMapping(value = "cancook", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Pizza> canCoockPizza(@RequestBody ObjectNode requete) {
+
+        Type fooType = new TypeToken<List<Ingredient>>() {}.getType();
+        Gson gson = new Gson();
+        List<Ingredient> ingredients = gson.fromJson(requete.get("ingredient").toString(), fooType);
+
+        Cooker cooker = new Cooker(ingredients, pizzaService);
+
+        return cooker.canCookPizzas();
+    }
+
 
     @RequestMapping(value = "cooker", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,7 +83,7 @@ public class HomeController {
     public Boolean buyPizza(@RequestBody ObjectNode requete) {
         Gson gson = new Gson();
         Type listPizzaType = new TypeToken<List<Pizza>>() {}.getType();
-        List<Pizza> pizzas = gson.fromJson(requete.get("pizzas").toString(), listPizzaType);
+        ArrayList<Pizza> pizzas = gson.fromJson(requete.get("pizzas").toString(), listPizzaType);
         Cooker cooker = new Cooker(pizzas, pizzaService);
         return cooker.buyPizza();
     }

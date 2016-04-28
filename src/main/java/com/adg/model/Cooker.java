@@ -52,9 +52,15 @@ public class Cooker {
      * Cooker for buying a pizza
      * @param pizzasToDo
      */
-    public Cooker(List<Pizza>  pizzasToDo, PizzaService pizzaSer) {
-        this.pizzas = pizzasToDo;
-        this.pizzaService = pizzaSer;
+    public Cooker(ArrayList<Pizza>  pizzasToDo, PizzaService pizzaSer) {
+        pizzas = pizzasToDo;
+        pizzaService = pizzaSer;
+    }
+
+
+    public Cooker(List<Ingredient> ingre, PizzaService pizzaSer) {
+        ingredients = ingre;
+        pizzaService = pizzaSer;
     }
 
     /**
@@ -78,18 +84,68 @@ public class Cooker {
         return true;
     }
 
-    /* If you don't put all ingredients for creating the pizza,
-    *
-    * */
+    /**
+     * @return la listes des pizzas que l'on peut cooker
 
-    public List<Ingredient> indispoIng (List<Ingredient> IngN){
-        List<Ingredient> ingredientN = pizzaService.getIngredientOf(pizza);
-        for (Ingredient ingredient:ingredientN ) {
-            if (ingredientN != IngN){
+    public List<Pizza> canCookPizzas() {
 
+        List<Pizza> pizzaNoneCookable = new ArrayList<Pizza>();
+        boolean canBeCreated = true;
+        List<Pizza> pizzaListe = pizzaService.getAllTypeOfPizza();
+
+        for (Pizza piz : pizzaListe) {
+            List<Ingredient> ingredientsneeded = pizzaService.getIngredientOf(piz);
+            for (Ingredient ingredient : ingredients) {
+                if(!ingredientsneeded.contains(ingredient)){
+                    canBeCreated = false;
+                }
             }
+            if (canBeCreated) {
+                pizzaNoneCookable.add(piz);
+            }
+            canBeCreated = true;
         }
-        return indispoIng(ingredientN);
+
+        return pizzaNoneCookable;
+    }*/
+
+    /**
+     * @return la listes des pizzas que l'on peut cooker
+     */
+    public List<Pizza> canCookPizzas() {
+
+        List<Pizza> pizzaCookable = new ArrayList<Pizza>();
+        boolean canBeCreated = true;
+        List<Pizza> pizzaListe = pizzaService.getAllTypeOfPizza();
+
+        for (Pizza piz : pizzaListe) {
+            List<Ingredient> ingredientsneeded = pizzaService.getIngredientOf(piz);
+            for (Ingredient ingredient : ingredientsneeded) {
+                if(!ingredients.contains(ingredient)){
+                    canBeCreated = false;
+                }
+            }
+            if (canBeCreated) {
+                pizzaCookable.add(piz);
+            }
+            canBeCreated = true;
+        }
+
+        return pizzaCookable;
+    }
+
+    /**
+    * If you don't put all ingredients for creating the pizza,
+    */
+    public List<Ingredient> indispoIng (){
+        List<Ingredient> ingredientsNeeded = pizzaService.getIngredientOf(pizza);
+        List<Ingredient> ingredientsMiss = new ArrayList<Ingredient>();
+        for (Ingredient ingredient:ingredientsNeeded ) {
+            if (!ingredients.contains(ingredient))
+                ingredientsMiss.add(ingredient);
+        }
+
+        return ingredientsMiss;
     }
 
 
