@@ -7,8 +7,8 @@ var ElemPizza = React.createClass({
         return {data: []};
     },
     render : function () {
-        return <div className="col-md-4 text-center pizza">
-                 <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.props.number}</button></h3><img className="imagepizza" src={this.props.url}/>
+        return <div className="col-md-6 text-center pizza">
+                 <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.props.number}</div></h3><img className="imagepizza" src={this.props.url}/>
                 <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button></div>
         </div>
     },
@@ -16,7 +16,7 @@ var ElemPizza = React.createClass({
         //this.setState({tmpIngredients : this.state.tmpIngredients.push(e.value)});
         var pizza = {"name":this.props.name,"ingredients":this.props.ingredients,"number":parseInt(this.props.number),"url": this.props.url};
         var data = {"ingredient" :tmpIngredients, "pizza" : pizza};
-        console.log(this.props);
+        var index = this.props.index;
         $.ajax({
             url: this.props.target,
             contentType:'application/json',
@@ -24,8 +24,42 @@ var ElemPizza = React.createClass({
             data:  JSON.stringify(data),
             dataType : 'json',
             success: function(data) {
-                //this.setState({data: data});
-                console.log(data);
+                var alert = document.getElementById("alert");
+                alert.innerHTML = '';
+                $('#alert').removeClass("custom-alert");
+                $('#alert').removeClass("hide-alert");
+                $('#alert').removeClass("alert-success");
+                $('#alert').removeClass("alert-danger");
+                $('#alert').removeClass("show-alert");
+                 if (data === true) {
+                    var num = document.getElementById(index.toString());
+                    num.innerHTML = (parseInt(num.innerHTML) + 1).toString();
+
+                     $('#alert').addClass("alert-success");
+                     $('#alert').addClass("show-alert");
+                     alert.innerHTML = pizza.name + " a été cuisinée avec succées! ";
+                     window.setTimeout(function () {
+                         $('#alert').addClass("hide-alert");
+                         $('#alert').removeClass("show-alert");
+                     }, 3000);
+                     window.setTimeout(function () {
+                         $('#alert').removeClass("hide-alert");
+                         $('#alert').removeClass("alert-success");
+                         $('#alert').addClass("custom-alert");
+                     }, 4500);
+                } else {
+                     $('#alert').addClass("alert-danger");
+                     $('#alert').addClass("show-alert");
+                     window.setTimeout(function () {
+                         $('#alert').addClass("hide-alert");
+                         $('#alert').removeClass("show-alert");
+                     }, 3000);
+                     window.setTimeout(function () {
+                         $('#alert').removeClass("hide-alert");
+                         $('#alert').removeClass("alert-danger");
+                         $('#alert').addClass("custom-alert");
+                     }, 4500);
+                }
 
             }.bind(this),
             error: function(xhr, status, err) {
@@ -35,14 +69,13 @@ var ElemPizza = React.createClass({
             }.bind(this)
         });
     }
-
 });
+
 var Pizza = React.createClass({
     getInitialState: function() {
         return {pizzas: [], count : 0};
     },
     componentDidMount: function() {
-
         $.ajax({
             url : this.props.source,
             datatype : 'json' ,
@@ -62,11 +95,8 @@ var Pizza = React.createClass({
         // Generation of virtual DOM row pizza
         return <div>{this.state.pizzas.map(function (item, index) {
 
-            return <ElemPizza key={item.name} name={item.name} number={item.number} ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker"/>
+            return <ElemPizza key={item.name} name={item.name} number={item.number} ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker" index={index}/>
         })}</div>;
-    },
-    onChange(){
-        console.log("Hello ");
     }
 });
 
@@ -97,13 +127,13 @@ var ElemIngredient = React.createClass({
     },
 
     render : function () {
-        return <div key={this.props.name}  className="row ingredient">
-            <img src={this.props.url} className="img-ingredient col-md-1"/>
-            <div    className="col-md-5 description">{this.props.name}</div>
+        return <div key={this.props.name}  className="row ingredient vcenter">
+            <img src={this.props.url} className="img-ingredient col-md-3 vcenter"/>
+            <div  className="col-md-5 description vcenter">{this.props.name}</div>
+            <div className="btn btn-style-2 btn-circle btn-lg col-md-1 vcenter" >{this.state.count}</div>
 
-            <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 plus" >+</button>
-            <button className="btn btn-style-2 btn-circle btn-lg col-md-1">{this.state.count}</button>
-            <button onClick={this.onMinus.bind(this, this.props)}className="btn btn-style col-md-1 minus">-</button>
+            <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins vcenter" >+</button>
+            <button onClick={this.onMinus.bind(this, this.props)}className="btn btn-style col-md-1 btn-plus-moins vcenter">-</button>
         </div>
     }
 });

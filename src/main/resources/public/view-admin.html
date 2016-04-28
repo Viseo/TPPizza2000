@@ -10,25 +10,40 @@
 </head>
 
 <body>
-<h1>Hello, Pizza!</h1>
+<header>
+    <div class="row text-center">
+        <div class="col-md-12 ">
+            <h1>Admin Pizza!</h1>
+        </div>
+</header>
+
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="row-fluid col-md-4">
-            <div class="sidebar-nav" id="ingredients">
-
-
-
-            </div>
+            <div class="sidebar-nav" id="ingredients"></div>
         </div>
         <div class="row-fluid col-md-8">
+            <div  id="pizzas"></div>
 
-            <div  id="pizzas">
 
-            </div>
+
+          <div class="settings">
+              <div class="row">
+                  <div class="question">
+                      Afficher les pizzas indisponibles :
+                  </div>
+                  <div class="switch" id="switch">
+                      <input id="cmn-toggle-5" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
+                      <label for="cmn-toggle-5"></label>
+                  </div>
+              </div><!-- /row -->
+          </div>
 
         </div>
     </div>
-    <div id="test"></div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 alert custom-alert" id="alert"></div>
+    </div>
 </div>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
