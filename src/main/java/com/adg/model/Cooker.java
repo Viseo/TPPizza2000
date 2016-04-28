@@ -18,6 +18,7 @@ public class Cooker {
     private PizzaService pizzaService;
 
     private Pizza pizza;
+    private List<Pizza> pizzas;
     private List<Ingredient> ingredients;
 
     public Pizza getPizza() {
@@ -49,13 +50,12 @@ public class Cooker {
 
     /**
      * Cooker for buying a pizza
-     * @param pizzaToDo
+     * @param pizzasToDo
      */
-    public Cooker(Pizza pizzaToDo, PizzaService pizzaSer) {
-        pizza = pizzaToDo;
-        pizzaService = pizzaSer;
+    public Cooker(List<Pizza>  pizzasToDo, PizzaService pizzaSer) {
+        this.pizzas = pizzasToDo;
+        this.pizzaService = pizzaSer;
     }
-
 
     /**
      * if you can cook the pizza update the data.json +1 for the corresponding pizza
@@ -89,7 +89,7 @@ public class Cooker {
 
             }
         }
-                return indispoIng(ingredientN);
+        return indispoIng(ingredientN);
     }
 
 
@@ -98,19 +98,37 @@ public class Cooker {
      * @return true if pizza existe en pizza number > 0  false otherwise
      */
     public boolean buyPizza() {
+        List<Pizza> newPizzas = new ArrayList<Pizza>();
+        // Verify quantity purshases of pizza
+        for (Pizza piz : pizzas){
+            for (Pizza t : pizzaService.getAllTypeOfPizza()){
+                if(piz.getName().equals(t.getName()) && piz.getNumber() > t.getNumber()){
+                    return false;
+                }
 
-        for (Pizza piz: pizzaService.getAllTypeOfPizza()) {
-            if (piz.getName().equals(pizza.getName()) && piz.getNumber() > 0) {
-                piz.setNumber(piz.getNumber()-1);
-                try {
-                    pizzaService.updatePizza(piz);
-                    return true;
-                } catch (IOException e) {
-                    e.printStackTrace();
+            }
+            newPizzas.add(piz);
+        }
+        // Update pizza quantity
+        for (Pizza piz : newPizzas){
+            for (Pizza t : pizzaService.getAllTypeOfPizza()){
+                if(piz.getName().equals(t.getName())){
+                    Pizza newPizza = new Pizza();
+                    newPizza.setName(piz.getName());
+                    newPizza.setNumber(t.getNumber()-piz.getNumber());
+                    // Check number
+                    if(t.getNumber()-piz.getNumber()>=0){
+                        try {
+                            pizzaService.updatePizza(newPizza);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         }
 
-        return false;
+
+        return true;
     }
 }

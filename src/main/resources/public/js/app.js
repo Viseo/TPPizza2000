@@ -7,7 +7,9 @@ var ElemPizza = React.createClass({
     },
     render : function () {
         return <div className="col-md-6 text-center pizza">
-                 <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.props.number}</div></h3><img className="imagepizza" src={this.props.url}/>
+                 <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.props.number}</div></h3>
+                    <img className="imagepizza" src={this.props.url}/>
+                    
                 <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button></div>
         </div>
     },
@@ -129,7 +131,6 @@ var ElemIngredient = React.createClass({
             <img src={this.props.url} className="img-ingredient col-md-3 vcenter"/>
             <div  className="col-md-5 description vcenter">{this.props.name}</div>
             <div className="btn btn-style-2 btn-circle btn-lg col-md-1 vcenter" >{this.state.count}</div>
-
             <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins vcenter" >+</button>
             <button onClick={this.onMinus.bind(this, this.props)}className="btn btn-style col-md-1 btn-plus-moins vcenter">-</button>
         </div>

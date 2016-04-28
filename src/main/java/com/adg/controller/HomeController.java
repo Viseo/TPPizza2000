@@ -68,9 +68,10 @@ public class HomeController {
     @RequestMapping(value = "buypizza", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Boolean buyPizza(@RequestBody ObjectNode requete) {
-
-        System.out.print("Get request !");
-        return false;
+        Gson gson = new Gson();
+        Type listPizzaType = new TypeToken<List<Pizza>>() {}.getType();
+        List<Pizza> pizzas = gson.fromJson(requete.get("pizzas").toString(), listPizzaType);
+        Cooker cooker = new Cooker(pizzas, pizzaService);
+        return cooker.buyPizza();
     }
-
 }

@@ -4,11 +4,14 @@
 
 var ElemPizza = React.createClass({
     getInitialState : function () {
-        return {data: []};
+        return {data: [], number : this.props.number, name : this.props};
     },
     render : function () {
         return <div className="col-md-4 text-center pizza">
             <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.props.number}</button></h3><img className="imagepizza" src={this.props.url}/>
+            <div>{this.props.ingredients.map(function(result) {
+                return <li>{result.name}</li>;
+            })}</div>
             <div className="center-block" ><button onClick={this.onReserver.bind(this, this.props)} className="btn btn-style">Réserver</button></div>
         </div>
     },
@@ -46,7 +49,7 @@ var Pizza = React.createClass({
 });
 var Panier = React.createClass({
     getInitialState : function () {
-      return {title : "Hello Pizza"};
+      return {title : "Hello Pizza", _pizzas : _pizzas};
     },
     render: function() {
         return<div className="row-fluid">
@@ -55,16 +58,17 @@ var Panier = React.createClass({
             </div>
             <div className="col-md-2 col-md-offset-2">
                 <div id="notification" className="notification-hide">0</div>
-                <i id="pannier-container" onClick={this.onClick} className="fa fa-shopping-basket fa-4x pannier" aria-hidden="true" data-original-title title aria-describedby="popover564388" ></i>
+                <i id="pannier-container" onClick={this.onClick.bind(this, this.props)} className="fa fa-shopping-basket fa-4x pannier" aria-hidden="true" data-original-title title aria-describedby="popover564388" ></i>
             </div>
         </div>;
     },
-    onClick : function () {
+    onClick : function (props) {
+        var target = this.props.target;
         $("#pannier-container").popover({
                 trigger : 'click',
                 placement : 'bottom',
                 html: 'true',
-                title:'<h5 align="center">Pannier</h5>',
+                title:'<h5 align="center">Panier</h5>',
                 content : '',
                 template:
                 '<div class="popover"><div class="arrow"></div>'+
@@ -95,17 +99,32 @@ var Panier = React.createClass({
                         $this.popover('hide');
 
                     });
-                    var data = _pizzas;
+
                     //update link text on submit
                     $('.popover-submit').click(function() {
-                       
+                        var data = {"pizzas" :_pizzas};
+                        console.log(data);
+                        $.ajax({
+                            url: target,
+                            contentType:'application/json',
+                            type: 'POST',
+                            data:  JSON.stringify(data),
+                            dataType : 'json',
+                            success: function(response) {
+                                _pizzas = [];
+                                console.log(response);
+                            }.bind(this),
+                            error: function(xhr, status, err) {
+                                console.log(status);
+                            }.bind(this)
+                        });
                         $this.text($('.popover-textarea').val());
                         $this.popover('hide');
                     });
                 }, 50);
 
             });
-        console.log(_pizzas);
+
     }
 });
 ReactDOM.render(
