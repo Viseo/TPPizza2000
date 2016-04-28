@@ -1,53 +1,9 @@
 /**
  * Created by Edgar on 25/04/2016.
  */
-var _pizzas = [];
-
-$("#pannier-container").popover({
-        trigger : 'click',
-        placement : 'bottom',
-        html: 'true',
-        title:'<h5 align="center">Pannier</h5>',
-        content : '',
-        template:
-        '<div class="popover"><div class="arrow"></div>'+
-        '<h2 class="popover-title"></h2><div class="popover-content">'+
-
-        '</div><div class="popover-footer text-center"><button type="button" class="btn btn-style-invers popover-submit">'+
-        '<i class="fa fa-check" aria-hidden="true"></i> Valider </button>&nbsp;&nbsp;'+
-
-        '<button type="button" id="popover-cancel" class="btn btn-default popover-cancel">'+
-        '<i class="fa fa-times" aria-hidden="true"></i> Annuler </button></div></div>'
-    })
-    .on('show.bs.popover', function() {
-
-        //hide any visible comment-popover
-        var $this = $(this);
-        window.setTimeout(function () {
-
-            $("#notification").removeClass("notification-show");
-            $("#notification").addClass("notification-hide");
-            var notif = document.getElementById("notification");
-            notif.innerHTML = "0";
-
-            renderPanier();
-            //close on cancel
-            $('.popover-cancel').click(function() {
-                _pizzas = [];
-                notif.innerHTML = '0';
-                $this.popover('hide');
-            });
-            //update link text on submit
-            $('.popover-submit').click(function() {
-
-                $this.text($('.popover-textarea').val());
-                $this.popover('hide');
-            });
-        }, 50);
-
-    });
 
 
+ var _pizzas = [];
 function renderPanier() {
     var contentP = document.getElementsByClassName("popover-content");
 
@@ -98,7 +54,7 @@ function renderPanier() {
             });
 
         } else {
-            contentP[0].innerHTML = "Vous n'avez pas choisi de pizza";
+            contentP[0].innerHTML = "Panier vide";
         }
     }
 }
@@ -124,6 +80,7 @@ function addPizza(pizzaName) {
     $("#notification").addClass("anim");
 
     renderPanier();
+
 }
 
 

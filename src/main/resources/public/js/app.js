@@ -1,4 +1,3 @@
-// ingredients list client-side
 var tmpIngredients = [];
 
 // Component <Pizza/> Contain List Of Pizzas
@@ -94,7 +93,6 @@ var Pizza = React.createClass({
     render: function() {
         // Generation of virtual DOM row pizza
         return <div>{this.state.pizzas.map(function (item, index) {
-
             return <ElemPizza key={item.name} name={item.name} number={item.number} ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker" index={index}/>
         })}</div>;
     }
@@ -188,13 +186,11 @@ var Ingredients = React.createClass({
 });
 
 ReactDOM.render(
-    <Pizza items={pizzas} source="http://localhost:8080/admin/pizza" />,
+    <Pizza  source="http://localhost:8080/admin/pizza" />,
     document.getElementById('pizzas')
 );
 
 ReactDOM.render(
-    <Ingredients   items={ingredients} source="http://localhost:8080/admin/ingredient"/>,
+    <Ingredients   source="http://localhost:8080/admin/ingredient"/>,
     document.getElementById('ingredients')
-
 );
-
