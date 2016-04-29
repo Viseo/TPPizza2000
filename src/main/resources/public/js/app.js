@@ -3,11 +3,11 @@ var tmpIngredients = [];
 // Component <Pizza/> Contain List Of Pizzas
 var ElemPizza = React.createClass({
     getInitialState : function () {
-        return {data: []};
+        return {data: [], number : this.props.number};
     },
     render : function () {
         return <div className="col-md-6 text-center pizza" id={this.props.indexP}>
-            <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.props.number}</div></h3><img className="imagepizza" src={this.props.url}/>
+            <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.state.number}</div></h3><img className="imagepizza" src={this.props.url}/>
             <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button></div>
         </div>
     },
