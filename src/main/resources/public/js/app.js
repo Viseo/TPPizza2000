@@ -3,11 +3,11 @@ var tmpIngredients = [];
 // Component <Pizza/> Contain List Of Pizzas
 var ElemPizza = React.createClass({
     getInitialState : function () {
-        return {data: []};
+        return {data: [], number:this.props.number};
     },
     render : function () {
         return <div className="col-md-6 text-center pizza" id={this.props.indexP}>
-                 <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.props.number}</div></h3><img className="imagepizza" src={this.props.url}/>
+                 <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.state.number}</div></h3><img className="imagepizza" src={this.props.url}/>
                 <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button></div>
         </div>
     },
@@ -30,34 +30,44 @@ var ElemPizza = React.createClass({
                 $('#alert').removeClass("alert-success");
                 $('#alert').removeClass("alert-danger");
                 $('#alert').removeClass("show-alert");
-                 if (data === true) {
-                    var num = document.getElementById(index.toString());
-                    num.innerHTML = (parseInt(num.innerHTML) + 1).toString();
 
-                     $('#alert').addClass("alert-success");
-                     $('#alert').addClass("show-alert");
-                     alert.innerHTML = pizza.name + " a été cuisinée avec succées! ";
-                     window.setTimeout(function () {
-                         $('#alert').addClass("hide-alert");
-                         $('#alert').removeClass("show-alert");
-                     }, 3000);
-                     window.setTimeout(function () {
-                         $('#alert').removeClass("hide-alert");
-                         $('#alert').removeClass("alert-success");
-                         $('#alert').addClass("custom-alert");
-                     }, 4500);
-                } else {
-                     $('#alert').addClass("alert-danger");
-                     $('#alert').addClass("show-alert");
-                     window.setTimeout(function () {
-                         $('#alert').addClass("hide-alert");
-                         $('#alert').removeClass("show-alert");
-                     }, 3000);
-                     window.setTimeout(function () {
-                         $('#alert').removeClass("hide-alert");
-                         $('#alert').removeClass("alert-danger");
-                         $('#alert').addClass("custom-alert");
-                     }, 4500);
+                console.log(data.length);
+                if(data.length === 0){
+                    this.setState({number : this.state.number+1});
+                    var num = document.getElementById(index.toString());
+                    //num.innerHTML = (parseInt(num.innerHTML) + 1).toString();
+                    $('#alert').addClass("alert-success");
+                    $('#alert').addClass("show-alert");
+                    alert.innerHTML = pizza.name + " a été cuisinée avec succées! ";
+                    window.setTimeout(function () {
+                        $('#alert').addClass("hide-alert");
+                        $('#alert').removeClass("show-alert");
+                    }, 3000);
+                    window.setTimeout(function () {
+                        $('#alert').removeClass("hide-alert");
+                        $('#alert').removeClass("alert-success");
+                        $('#alert').addClass("custom-alert");
+                    }, 4500);
+                }else{
+                    var message = "Il vous manque quelques ingredients : ";
+
+                    data.map(function (elem) {
+                            message += "<strong> "+elem.name+" </strong>";
+                    });
+
+                    $('#alert').addClass("alert-danger");
+                    $('#alert').addClass("show-alert");
+                    alert.innerHTML = message;
+                    window.setTimeout(function () {
+                        $('#alert').addClass("hide-alert");
+                        $('#alert').removeClass("show-alert");
+                    }, 3000);
+                    window.setTimeout(function () {
+                        $('#alert').removeClass("hide-alert");
+                        $('#alert').removeClass("alert-danger");
+                        $('#alert').addClass("custom-alert");
+                    }, 4500);
+
                 }
 
             }.bind(this),
@@ -93,8 +103,8 @@ var Pizza = React.createClass({
     render: function() {
         // Generation of virtual DOM row pizza
         return <div>{this.state.pizzas.map(function (item, index) {
-            return <ElemPizza key={item.name} name={item.name} number={item.number}
-                              ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker"
+            return <ElemPizza key={item.name} name={item.name}
+                              ingredients={item.ingredients} number={item.number}url={item.url} target="http://localhost:8080/admin/cooker"
                               index={index} indexP={'id-pizza-'+index}/>
         })}</div>;
     }
@@ -111,7 +121,6 @@ var ElemIngredient = React.createClass({
         ingredient.name = props.name;
         ingredient.quantite = 1;
         tmpIngredients = tmpIngredients.concat(ingredient);
-
         jsonCanCook();
     },
     onMinus : function (props) {
@@ -124,10 +133,8 @@ var ElemIngredient = React.createClass({
         });
         var index = tmpIngredients.indexOf(elem);
         if(elem)tmpIngredients.splice(index, 1);
-
         jsonCanCook();
     },
-
     render : function () {
         return <div key={this.props.name}  className="row ingredient ">
             <img src={this.props.url} className="img-ingredient col-md-3 "/>
@@ -202,6 +209,7 @@ ReactDOM.render(
 
 function jsonCanCook() {
 
+<<<<<<< 96294c782dd2dc16939df414af6994f6a770f89f
     if (getCookie("toogleIsSelected") === "false") {
         var pizzas = document.getElementsByClassName("pizza");
         [].forEach.call(pizzas, function (piz) {
@@ -244,6 +252,28 @@ function jsonCanCook() {
             }
         });
     }
+=======
+    if (getCookie("toogleIsSelected") === "false") {return;}
+    
+    var dataToSend = tmpIngredients.map(function (obj) { return {name: obj.name, url: ''}  });
+    var data = {"ingredient" :dataToSend};
+
+     $.ajax({
+        url : "http://localhost:8080/admin/cancook",
+        contentType:'application/json',
+        type: 'POST',
+        data:   JSON.stringify(data),
+        dataType : 'json',
+        success : function (data) {
+
+            
+        },
+        error : function(xhr, status, err){
+            console.log(err);
+            
+        }
+    });
+>>>>>>> update view admin
 }
 
 var _toogleIsClick = false;
@@ -281,6 +311,7 @@ function getCookie(cname) {
     return "";
 }
 
+<<<<<<< 96294c782dd2dc16939df414af6994f6a770f89f
 function checkCookie() {
     _toogle = !_toogle;
     setCookie("toogleIsSelected", _toogle.toString(), 30);
@@ -299,3 +330,5 @@ $( document ).ready(function() {
 });
 
 jsonCanCook();
+=======
+>>>>>>> update view admin

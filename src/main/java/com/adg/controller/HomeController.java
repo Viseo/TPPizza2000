@@ -61,7 +61,7 @@ public class HomeController {
 
     @RequestMapping(value = "cooker", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Boolean coockPizza(@RequestBody ObjectNode requete) {
+    public List<Ingredient> coockPizza(@RequestBody ObjectNode requete) {
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Ingredient.class, new IngregientInstanceCreator());
@@ -75,7 +75,7 @@ public class HomeController {
 
         Cooker cooker = new Cooker(pizzas, ingredients, pizzaService);
 
-        return cooker.cookPizza();
+        return cooker.indispoIng();
     }
 
     @RequestMapping(value = "buypizza", method = RequestMethod.POST)

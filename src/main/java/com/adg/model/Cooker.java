@@ -74,6 +74,7 @@ public class Cooker {
             if (!ingredients.contains(ingredient))
                 return false;
         }
+
         //We have all the ingredients
         pizza.setNumber(pizza.getNumber()+1);
         try {
@@ -145,6 +146,15 @@ public class Cooker {
                 ingredientsMiss.add(ingredient);
         }
 
+        if(ingredientsMiss.size() == 0){
+            //We have all the ingredients
+            pizza.setNumber(pizza.getNumber()+1);
+            try {
+                pizzaService.updatePizza(pizza);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return ingredientsMiss;
     }
 
