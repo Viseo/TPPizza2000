@@ -52,7 +52,7 @@ var Panier = React.createClass({
       return {title : "Hello Pizza", _pizzas : _pizzas};
     },
     render: function() {
-        return<div className="row-fluid">
+        return<div className="row-fluid text-center">
             <div className="col-md-4 col-md-offset-4">
                 <h1>{this.state.title}</h1>
             </div>
@@ -112,10 +112,49 @@ var Panier = React.createClass({
                             dataType : 'json',
                             success: function(response) {
                                 _pizzas = [];
-                                console.log(response);
+                                var alert = document.getElementById("alert");
+                                alert.innerHTML = '';
+                                $('#alert').removeClass("custom-alert");
+                                $('#alert').removeClass("hide-alert");
+                                $('#alert').removeClass("alert-success");
+                                $('#alert').removeClass("alert-danger");
+                                $('#alert').removeClass("show-alert");
+
+                                $('#alert').addClass("alert-success");
+                                $('#alert').addClass("show-alert");
+                                alert.innerHTML =  " <b>Votre pizza a bien été commandée </b>";
+                                window.setTimeout(function () {
+                                    $('#alert').addClass("hide-alert");
+                                    $('#alert').removeClass("show-alert");
+                                }, 3000);
+                                window.setTimeout(function () {
+                                    $('#alert').removeClass("hide-alert");
+                                    $('#alert').removeClass("alert-success");
+                                    $('#alert').addClass("custom-alert");
+                                }, 4500);
+
                             }.bind(this),
                             error: function(xhr, status, err) {
-                                console.log(status);
+                                var alert = document.getElementById("alert");
+                                alert.innerHTML = '';
+                                $('#alert').removeClass("custom-alert");
+                                $('#alert').removeClass("hide-alert");
+                                $('#alert').removeClass("alert-success");
+                                $('#alert').removeClass("alert-danger");
+                                $('#alert').removeClass("show-alert");
+
+                                $('#alert').addClass("alert-danger");
+                                $('#alert').addClass("show-alert");
+                                alert.innerHTML =  " <b>Une erreur est survenue sur le serveur</b>";
+                                window.setTimeout(function () {
+                                    $('#alert').addClass("hide-alert");
+                                    $('#alert').removeClass("show-alert");
+                                }, 3000);
+                                window.setTimeout(function () {
+                                    $('#alert').removeClass("hide-alert");
+                                    $('#alert').removeClass("alert-danger");
+                                    $('#alert').addClass("custom-alert");
+                                }, 4500);
                             }.bind(this)
                         });
                         $this.text($('.popover-textarea').val());
