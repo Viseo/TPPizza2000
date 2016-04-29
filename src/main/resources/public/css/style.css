@@ -346,3 +346,33 @@ input.cmn-toggle-round-flat:checked + label:after {
     margin-left: 60px;
     background-color: #8ce196;
 }
+
+
+
+/* ============================================================
+  Listes ingedient clients
+============================================================ */
+ul {
+    font-size: large;
+    width: 100%;
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+
+ul li {
+     text-align: center;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 calc(33.33% - 20px);
+    -ms-flex: 1 0 calc(33.33% - 20px);
+    flex: 1 0 calc(33.33% - 20px);
+    padding: 5px;
+    margin: 0 5px;
+}
