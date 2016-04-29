@@ -8,10 +8,11 @@ var ElemPizza = React.createClass({
     },
     render : function () {
         return <div className="col-md-4 text-center pizza">
-            <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.props.number}</button></h3><img className="imagepizza" src={this.props.url}/>
-            <div>{this.props.ingredients.map(function(result) {
+            <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.props.number}</button></h3>
+            <img className="imagepizza" src={this.props.url}/>
+            <ul>{this.props.ingredients.map(function(result) {
                 return <li>{result.name}</li>;
-            })}</div>
+            })}</ul>
             <div className="center-block" ><button onClick={this.onReserver.bind(this, this.props)} className="btn btn-style">Réserver</button></div>
         </div>
     },
@@ -56,7 +57,7 @@ var Panier = React.createClass({
             <div className="col-md-4 col-md-offset-4">
                 <h1>{this.state.title}</h1>
             </div>
-            <div className="col-md-2 col-md-offset-2">
+            <div className="col-md-1 col-md-offset-2">
                 <div id="notification" className="notification-hide">0</div>
                 <i id="pannier-container" onClick={this.onClick.bind(this, this.props)} className="fa fa-shopping-basket fa-4x pannier" aria-hidden="true" data-original-title title aria-describedby="popover564388" ></i>
             </div>
