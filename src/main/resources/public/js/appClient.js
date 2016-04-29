@@ -8,7 +8,7 @@ var ElemPizza = React.createClass({
     },
     render : function () {
         return <div className="col-md-4 text-center pizza">
-            <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.props.number}</button></h3>
+            <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.state.number}</button></h3>
             <img className="imagepizza" src={this.props.url}/>
             <ul>{this.props.ingredients.map(function(result) {
                 return <li>{result.name}</li>;
@@ -133,6 +133,7 @@ var Panier = React.createClass({
                                     $('#alert').removeClass("alert-success");
                                     $('#alert').addClass("custom-alert");
                                 }, 4500);
+
 
                             }.bind(this),
                             error: function(xhr, status, err) {
