@@ -30,10 +30,12 @@ var ElemPizza = React.createClass({
                 $('#alert').removeClass("alert-success");
                 $('#alert').removeClass("alert-danger");
                 $('#alert').removeClass("show-alert");
-                if (data === true) {
-                    var num = document.getElementById(index.toString());
-                    num.innerHTML = (parseInt(num.innerHTML) + 1).toString();
 
+                console.log(data.length);
+                if(data.length === 0){
+                    this.setState({number : this.state.number+1});
+                    var num = document.getElementById(index.toString());
+                    //num.innerHTML = (parseInt(num.innerHTML) + 1).toString();
                     $('#alert').addClass("alert-success");
                     $('#alert').addClass("show-alert");
                     alert.innerHTML = pizza.name + " a été cuisinée avec succées! ";
@@ -46,9 +48,16 @@ var ElemPizza = React.createClass({
                         $('#alert').removeClass("alert-success");
                         $('#alert').addClass("custom-alert");
                     }, 4500);
-                } else {
+                }else{
+                    var message = "Il vous manque quelques ingredients : ";
+
+                    data.map(function (elem) {
+                        message += "<strong>"+elem.name+"</strong>";
+                    });
+
                     $('#alert').addClass("alert-danger");
                     $('#alert').addClass("show-alert");
+                    alert.innerHTML = message;
                     window.setTimeout(function () {
                         $('#alert').addClass("hide-alert");
                         $('#alert').removeClass("show-alert");
@@ -58,6 +67,7 @@ var ElemPizza = React.createClass({
                         $('#alert').removeClass("alert-danger");
                         $('#alert').addClass("custom-alert");
                     }, 4500);
+
                 }
 
             }.bind(this),
