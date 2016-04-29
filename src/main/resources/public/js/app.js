@@ -202,32 +202,69 @@ ReactDOM.render(
 
 function jsonCanCook() {
 
-    if (getCookie("toogleIsSelected") === "false") {return;}
-    
-    var dataToSend = tmpIngredients.map(function (obj) { return {name: obj.name, url: ''}  });
-    var data = {"ingredient" :dataToSend};
+    if (getCookie("toogleIsSelected") === "false") {
+        var pizzas = document.getElementsByClassName("pizza");
+        [].forEach.call(pizzas, function (piz) {
+            var str = piz.children[0].innerText;
+            var newStr = str.replace(/\d+/g, "");
+            piz.style.display = "block";
+        });
+     }else {
+        var pizzas = document.getElementsByClassName("pizza");
+        [].forEach.call(pizzas, function (piz) {
+            var str = piz.children[0].innerText;
+            var newStr = str.replace(/\d+/g, "");
+            piz.style.display = "none";
+        });
+        var dataToSend = tmpIngredients.map(function (obj) { return {name: obj.name, url: ''}  });
+        var data = {"ingredient" :dataToSend};
+        console.log(data);
 
-     $.ajax({
-        url : "http://localhost:8080/admin/cancook",
-        contentType:'application/json',
-        type: 'POST',
-        data:   JSON.stringify(data),
-        dataType : 'json',
-        success : function (data) {
-            var pizzas = document.getElementsByClassName("pizza");
-            pizzas.forEach(function () {
-                
-            });
-            'id-pizza-'
-            
-        },
-        error : function(xhr, status, err){
-            console.log(err);
-            
-        }
-    });
+        $.ajax({
+            url : "http://localhost:8080/admin/cancook",
+            contentType:'application/json',
+            type: 'POST',
+            data:   JSON.stringify(data),
+            dataType : 'json',
+            success : function (data) {
+                // afficher les pizza qui son retourner par le serveur
+                var pizzas = document.getElementsByClassName("pizza");
+                [].forEach.call(pizzas, function (piz) {
+                    var str = piz.children[0].innerText;
+                    var newStr = str.replace(/\d+/g, "");
+                    data.forEach(function (d) {
+                        if (d.name.toString() === newStr.toString()){
+                            piz.style.display = "block";
+                        }
+                    });
+                });
+            },
+            error : function(xhr, status, err){
+                console.log(err);
+            }
+        });
+    }
 }
 
+var _toogleIsClick = false;
+var _toogle = false;
+$("#toogleIsClicked").click(function () {
+    if (_toogleIsClick) {
+        checkCookie();
+        console.log("toogle: " + _toogle);
+        _toogleIsClick = false;
+    }else {
+        _toogleIsClick = true;
+    }
+    jsonCanCook();
+});
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -243,3 +280,22 @@ function getCookie(cname) {
     }
     return "";
 }
+
+function checkCookie() {
+    _toogle = !_toogle;
+    setCookie("toogleIsSelected", _toogle.toString(), 30);
+}
+
+$( document ).ready(function() {
+    var checkbox = document.getElementById("cmn-toggle-5");
+    if (getCookie("toogleIsSelected") === "true") {
+        checkbox.checked = true;
+        _toogle = true;
+    } else {
+        checkbox.checked = false;
+        _toogle = false;
+    }
+    jsonCanCook();
+});
+
+jsonCanCook();
