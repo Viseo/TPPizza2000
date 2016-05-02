@@ -43,8 +43,10 @@ var Pizza = React.createClass({
     },
     render: function() {
         // Generation of virtual DOM row pizza
+        var urlCoocker = "http://"+url+"/admin/cooker";
         return <div>{this.state.pizzas.map(function (item, index) {
-            return <ElemPizza index={index} key={item.name} name={item.name} number={item.number} ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker"/>
+            return <ElemPizza index={index} key={item.name} name={item.name} number={item.number} ingredients={item.ingredients}
+                              url={item.url} target={urlCoocker}/>
         })}</div>;
     }
 
@@ -169,12 +171,14 @@ var Panier = React.createClass({
 
     }
 });
+var urlBuyPizza = "http://"+url+"/admin/cooker";
 ReactDOM.render(
-    <Panier  target="http://localhost:8080/admin/buypizza" />,
+    <Panier  target={urlBuyPizza} />,
     document.getElementById('header')
 );
+
 ReactDOM.render(
-    <Pizza source="http://localhost:8080/admin/pizza" />,
+    <Pizza source={urlPizza} />,
     document.getElementById('pizzas')
 );
 
