@@ -1,4 +1,5 @@
 var tmpIngredients = [];
+var url = "10.33.170.128:8080";
 class ElemPizza extends React.Component {
     constructor(props) {
         super(props);
@@ -122,9 +123,10 @@ class Pizza extends React.Component{
     }
     render() {
         // Generation of virtual DOM row pizza
+        var url = "http://"+url+"/admin/cooker";
         return <div>{this.state.pizzas.map(function (item, index) {
             return <ElemPizza key={item.name} name={item.name} number={item.number}
-                              ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker"
+                              ingredients={item.ingredients} url={item.url} target={url}
                               index={index} indexP={'id-pizza-'+index}/>
         })}</div>;
     }
@@ -224,14 +226,14 @@ class Ingredients extends React.Component{
         </div>
     }
 }
-
+var urlPizza = "http://"+url+"/admin/pizza";
 ReactDOM.render(
-    <Pizza source="http://localhost:8080/admin/pizza"/>,
+    <Pizza source={urlPizza} />,
     document.getElementById('pizzas')
 );
-
+var urlIngredients = "http://"+url+"/admin/ingredient";
 ReactDOM.render(
-    <Ingredients source="http://localhost:8080/admin/ingredient"/>,
+    <Ingredients source={urlIngredients}/>,
     document.getElementById('ingredients')
 );
 
@@ -258,7 +260,7 @@ function jsonCanCook() {
         console.log(data);
 
         $.ajax({
-            url: "http://localhost:8080/admin/cancook",
+            url: "http://"+url+"/admin/cancook",
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(data),
