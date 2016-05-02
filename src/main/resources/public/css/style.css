@@ -388,3 +388,41 @@ ul li {
     padding: 5px;
     margin: 0 5px;
 }
+
+/* ============================================================
+  Acceuil buttons
+============================================================ */
+.btn-view-1, .btn-view-2{
+
+    position: fixed;
+    width: 100%;
+    height: 50%;
+    cursor: pointer;
+}
+.btn-view-1:hover, .btn-view-2:hover{
+    color: #EA4E5C;
+}
+.btn-view-1{
+    top:  0px;
+    left: 0px;
+    color: white;
+    background: #0B604C;
+}
+.btn-view-2{
+    top:  50%;
+    left: 0px;
+    color: white;
+    background: #205068;
+}
+.btn-client{
+    left: 47%;
+    top:25%;
+    position: fixed;
+    font-size: 70px;
+}
+.btn-admin{
+    top:75%;
+    left: 47%;
+    position: fixed;
+    font-size: 70px;
+}

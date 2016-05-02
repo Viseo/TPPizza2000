@@ -178,9 +178,3 @@ ReactDOM.render(
     document.getElementById('pizzas')
 );
 
-
-class RowPizza extends React.Component{
-    render(){
-
-    }
-}
