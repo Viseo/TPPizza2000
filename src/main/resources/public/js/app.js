@@ -1,28 +1,41 @@
 var tmpIngredients = [];
-
-// Component <Pizza/> Contain List Of Pizzas
-var ElemPizza = React.createClass({
-    getInitialState : function () {
-        return {data: [], number : this.props.number};
-    },
-    render : function () {
+class ElemPizza extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            number : props.number
+        };
+    }
+    render() {
         return <div className="col-md-6 text-center pizza" id={this.props.indexP}>
-            <h3>{this.props.name}<div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index} >{this.state.number}</div></h3><img className="imagepizza" src={this.props.url}/>
-            <div className="center-block" ><button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button></div>
+            <h3>{this.props.name}
+                <div className="btn btn-style-2 btn-circle btn-lg" id={this.props.index}>{this.state.number}</div>
+            </h3>
+            <img className="imagepizza" src={this.props.url}/>
+            <div className="center-block">
+                <button onClick={this.onChange.bind(this, this.props)} className="btn btn-style">Cuisiner</button>
+            </div>
         </div>
-    },
-    onChange : function () {
+    }
+
+    onChange() {
         //this.setState({tmpIngredients : this.state.tmpIngredients.push(e.value)});
-        var pizza = {"name":this.props.name,"ingredients":this.props.ingredients,"number":parseInt(this.props.number),"url": this.props.url};
-        var data = {"ingredient" :tmpIngredients, "pizza" : pizza};
+        var pizza = {
+            "name": this.props.name,
+            "ingredients": this.props.ingredients,
+            "number": parseInt(this.props.number),
+            "url": this.props.url
+        };
+        var data = {"ingredient": tmpIngredients, "pizza": pizza};
         var index = this.props.index;
         $.ajax({
             url: this.props.target,
-            contentType:'application/json',
+            contentType: 'application/json',
             type: 'POST',
-            data:  JSON.stringify(data),
-            dataType : 'json',
-            success: function(data) {
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (data) {
                 var alert = document.getElementById("alert");
                 alert.innerHTML = '';
                 $('#alert').removeClass("custom-alert");
@@ -32,8 +45,8 @@ var ElemPizza = React.createClass({
                 $('#alert').removeClass("show-alert");
 
                 console.log(data.length);
-                if(data.length === 0){
-                    this.setState({number : this.state.number+1});
+                if (data.length === 0) {
+                    this.setState({number: this.state.number + 1});
                     var num = document.getElementById(index.toString());
                     //num.innerHTML = (parseInt(num.innerHTML) + 1).toString();
                     $('#alert').addClass("alert-success");
@@ -48,11 +61,11 @@ var ElemPizza = React.createClass({
                         $('#alert').removeClass("alert-success");
                         $('#alert').addClass("custom-alert");
                     }, 4500);
-                }else{
+                } else {
                     var message = "Il vous manque quelques ingredients : ";
 
                     data.map(function (elem) {
-                        message += "<strong>"+elem.name+"</strong>";
+                        message += "<strong>" + elem.name + "</strong>";
                     });
 
                     $('#alert').addClass("alert-danger");
@@ -71,36 +84,44 @@ var ElemPizza = React.createClass({
                 }
 
             }.bind(this),
-            error: function(xhr, status, err) {
+            error: function (xhr, status, err) {
                 //this.setState({data: data});
                 //console.error(this.props.url, status, err.toString());
                 console.log(data);
             }.bind(this)
         });
     }
-});
+}
+// Component <Pizza/> Contain List Of Pizzas
 
-var Pizza = React.createClass({
-    getInitialState: function() {
-        return {pizzas: [], count : 0};
-    },
-    componentDidMount: function() {
-        $.ajax({
-            url : this.props.source,
-            datatype : 'json' ,
-            cache : false,
-            success : function (data) {
-                this.setState({pizzas : data});
-            }.bind(this),
-            error : function(xhr, status, err){
-                console.error(this.props.source, status, err.toString());
-            }.bind(this)
-        });
-    },
-    componentWillUnmount: function() {
+class Pizza extends React.Component{
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            pizzas: [],
+            count : 0
+        };
+    }
+
+    componentDidMount() {
+    $.ajax({
+        url: this.props.source,
+        datatype: 'json',
+        cache: false,
+        success: function (data) {
+            this.setState({pizzas: data});
+        }.bind(this),
+        error: function (xhr, status, err) {
+            console.error(this.props.source, status, err.toString());
+        }.bind(this)
+    });
+}
+    componentWillUnmount() {
         this.serverRequest.abort();
-    },
-    render: function() {
+    }
+    render() {
         // Generation of virtual DOM row pizza
         return <div>{this.state.pizzas.map(function (item, index) {
             return <ElemPizza key={item.name} name={item.name} number={item.number}
@@ -108,104 +129,110 @@ var Pizza = React.createClass({
                               index={index} indexP={'id-pizza-'+index}/>
         })}</div>;
     }
-});
+}
 
-var ElemIngredient = React.createClass({
-    getInitialState : function(){
-        return {data: [], count:0};
-    },
-    onAdd : function (props) {
+class ElemIngredient extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            count : 0
+        };
+    }
+    onAdd(props) {
         // Add ingredient in memory stock
-        this.setState({count:this.state.count+1});
+        this.setState({count: this.state.count + 1});
         var ingredient = {};
         ingredient.name = props.name;
         ingredient.quantite = 1;
         tmpIngredients = tmpIngredients.concat(ingredient);
 
         jsonCanCook();
-    },
-    onMinus : function (props) {
+    }
+    onMinus(props) {
 
-        if(this.state.count>0)
-            this.setState({count:this.state.count-1});
+        if (this.state.count > 0)
+            this.setState({count: this.state.count - 1});
         // Add ingredient in memory stock
-        var elem = tmpIngredients.find(function(elem){
+        var elem = tmpIngredients.find(function (elem) {
             return elem.name == props.name;
         });
         var index = tmpIngredients.indexOf(elem);
-        if(elem)tmpIngredients.splice(index, 1);
+        if (elem)tmpIngredients.splice(index, 1);
 
         jsonCanCook();
-    },
+    }
 
-    render : function () {
-        return <div key={this.props.name}  className="row ingredient ">
+    render() {
+        return <div key={this.props.name} className="row ingredient ">
             <img src={this.props.url} className="img-ingredient col-md-3 "/>
-            <div  className="col-md-5 description ">{this.props.name}</div>
-            <div className="btn btn-style-2 btn-circle btn-lg col-md-1 " >{this.state.count}</div>
+            <div className="col-md-5 description ">{this.props.name}</div>
+            <div className="btn btn-style-2 btn-circle btn-lg col-md-1 ">{this.state.count}</div>
 
-            <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins " >+</button>
-            <button onClick={this.onMinus.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins ">-</button>
+            <button onClick={this.onAdd.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins ">+
+            </button>
+            <button onClick={this.onMinus.bind(this, this.props)} className="btn btn-style col-md-1 btn-plus-moins ">-
+            </button>
         </div>
     }
-});
-// Component <Ingredient/> Contain List Of Ingredients
-var Ingredients = React.createClass({
-
-    getInitialState: function() {
-        return {ingredients: []};
-    },
-
-    componentDidMount: function() {
+}
+class Ingredients extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            ingredients: []
+        };
+    }
+    componentDidMount() {
         // Get pizzas
         $.ajax({
-            url : this.props.source,
-            datatype : 'json' ,
-            cache : false,
-            success : function (data) {
-                this.setState({ingredients : data});
+            url: this.props.source,
+            datatype: 'json',
+            cache: false,
+            success: function (data) {
+                this.setState({ingredients: data});
             }.bind(this),
-            error : function(xhr, status, err){
+            error: function (xhr, status, err) {
                 console.error(this.props.source, status, err.toString());
             }.bind(this)
         });
         // Get ingerdients
         $.ajax({
-            url : this.props.source,
-            datatype : 'json' ,
-            cache : false,
-            success : function (data) {
-                this.setState({pizzas : data});
+            url: this.props.source,
+            datatype: 'json',
+            cache: false,
+            success: function (data) {
+                this.setState({pizzas: data});
             }.bind(this),
-            error : function(xhr, status, err){
+            error: function (xhr, status, err) {
                 console.error(this.props.source, status, err.toString());
             }.bind(this)
         });
-    },
-    componentWillUnmount: function() {
+    }
+    componentWillUnmount() {
         this.serverRequest.abort();
-    },
-
-
-    render : function () {
-
-        return<div>
-            {this.state.ingredients.map(function (item, index) {
-                return <ElemIngredient key={item.name} name={item.name} url={item.url} />
-            })
-            }
-        </div>
     }
 
-});
+
+    render() {
+
+        return <div>
+            {this.state.ingredients.map(function (item, index) {
+                return <ElemIngredient key={item.name} name={item.name} url={item.url}/>
+            })
+        }
+        </div>
+    }
+}
 
 ReactDOM.render(
-    <Pizza  source="http://localhost:8080/admin/pizza" />,
+    <Pizza source="http://localhost:8080/admin/pizza"/>,
     document.getElementById('pizzas')
 );
 
 ReactDOM.render(
-    <Ingredients   source="http://localhost:8080/admin/ingredient"/>,
+    <Ingredients source="http://localhost:8080/admin/ingredient"/>,
     document.getElementById('ingredients')
 );
 
@@ -219,37 +246,39 @@ function jsonCanCook() {
             var newStr = str.replace(/\d+/g, "");
             piz.style.display = "block";
         });
-    }else {
+    } else {
         var pizzas = document.getElementsByClassName("pizza");
         [].forEach.call(pizzas, function (piz) {
             var str = piz.children[0].innerText;
             var newStr = str.replace(/\d+/g, "");
             piz.style.display = "none";
         });
-        var dataToSend = tmpIngredients.map(function (obj) { return {name: obj.name, url: ''}  });
-        var data = {"ingredient" :dataToSend};
+        var dataToSend = tmpIngredients.map(function (obj) {
+            return {name: obj.name, url: ''}
+        });
+        var data = {"ingredient": dataToSend};
         console.log(data);
 
         $.ajax({
-            url : "http://localhost:8080/admin/cancook",
-            contentType:'application/json',
+            url: "http://localhost:8080/admin/cancook",
+            contentType: 'application/json',
             type: 'POST',
-            data:   JSON.stringify(data),
-            dataType : 'json',
-            success : function (data) {
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (data) {
                 // afficher les pizza qui son retourner par le serveur
                 var pizzas = document.getElementsByClassName("pizza");
                 [].forEach.call(pizzas, function (piz) {
                     var str = piz.children[0].innerText;
                     var newStr = str.replace(/\d+/g, "");
                     data.forEach(function (d) {
-                        if (d.name.toString() === newStr.toString()){
+                        if (d.name.toString() === newStr.toString()) {
                             piz.style.display = "block";
                         }
                     });
                 });
             },
-            error : function(xhr, status, err){
+            error: function (xhr, status, err) {
                 console.log(err);
             }
         });
@@ -263,7 +292,7 @@ $("#toogleIsClicked").click(function () {
         checkCookie();
         console.log("toogle: " + _toogle);
         _toogleIsClick = false;
-    }else {
+    } else {
         _toogleIsClick = true;
     }
     jsonCanCook();
@@ -271,15 +300,15 @@ $("#toogleIsClicked").click(function () {
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
@@ -296,7 +325,7 @@ function checkCookie() {
     setCookie("toogleIsSelected", _toogle.toString(), 30);
 }
 
-$( document ).ready(function() {
+$(document).ready(function () {
     var checkbox = document.getElementById("cmn-toggle-5");
     if (getCookie("toogleIsSelected") === "true") {
         checkbox.checked = true;
