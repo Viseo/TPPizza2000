@@ -177,6 +177,7 @@ ReactDOM.render(
     document.getElementById('header')
 );
 
+var urlPizza = "http://"+url+"/admin/pizza";
 ReactDOM.render(
     <Pizza source={urlPizza} />,
     document.getElementById('pizzas')
