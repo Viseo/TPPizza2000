@@ -47,7 +47,7 @@ class ElemPizza extends React.Component {
                 console.log(data.length);
                 if (data.length === 0) {
                     this.setState({number: this.state.number + 1});
-                    var num = document.getElementById(index.toString());
+
                     //num.innerHTML = (parseInt(num.innerHTML) + 1).toString();
                     $('#alert').addClass("alert-success");
                     $('#alert').addClass("show-alert");
@@ -84,7 +84,7 @@ class ElemPizza extends React.Component {
                 }
 
             }.bind(this),
-            error: function (xhr, status, err) {
+            error: function () {
                 //this.setState({data: data});
                 //console.error(this.props.url, status, err.toString());
                 console.log(data);
@@ -95,7 +95,6 @@ class ElemPizza extends React.Component {
 // Component <Pizza/> Contain List Of Pizzas
 
 class Pizza extends React.Component{
-
 
     constructor(props) {
         super(props);
@@ -242,15 +241,14 @@ function jsonCanCook() {
     if (getCookie("toogleIsSelected") === "false") {
         var pizzas = document.getElementsByClassName("pizza");
         [].forEach.call(pizzas, function (piz) {
-            var str = piz.children[0].innerText;
-            var newStr = str.replace(/\d+/g, "");
+
+
             piz.style.display = "block";
         });
     } else {
         var pizzas = document.getElementsByClassName("pizza");
         [].forEach.call(pizzas, function (piz) {
-            var str = piz.children[0].innerText;
-            var newStr = str.replace(/\d+/g, "");
+
             piz.style.display = "none";
         });
         var dataToSend = tmpIngredients.map(function (obj) {
