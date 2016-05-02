@@ -1,5 +1,6 @@
 var tmpIngredients = [];
 var url = "10.33.170.128:8080";
+//var url = "localhost:8080";
 class ElemPizza extends React.Component {
     constructor(props) {
         super(props);

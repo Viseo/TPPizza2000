@@ -2,6 +2,7 @@
  * Created by ABE3510 on 28/04/2016.
  */
 var url = "10.33.170.128:8080";
+//var url = "localhost:8080";
 var ElemPizza = React.createClass({
     getInitialState : function () {
         return {data: [], number : this.props.number, name : this.props};
@@ -72,11 +73,10 @@ var Panier = React.createClass({
                 trigger : 'click',
                 placement : 'bottom',
                 html: 'true',
-                title:'<h5 align="center">Panier</h5>',
                 content : '',
                 template:
                 '<div class="popover"><div class="arrow"></div>'+
-                '<h2 class="popover-title"></h2><div class="popover-content">'+
+                '<div class="popover-content">'+
 
                 '</div><div class="popover-footer text-center"><button type="button" class="btn btn-style-invers popover-submit">'+
                 '<i class="fa fa-check" aria-hidden="true"></i> Valider </button>&nbsp;&nbsp;'+
