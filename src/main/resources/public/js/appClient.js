@@ -7,9 +7,10 @@ var ElemPizza = React.createClass({
         return {data: [], number : this.props.number, name : this.props};
     },
     render : function () {
-        return <div className="col-md-4 text-center pizza">
+            return <div className="col-md-6 text-center pizza">
             <h3>{this.props.name}<button className="btn btn-style-2 btn-circle btn-lg">{this.state.number}</button></h3>
             <img className="imagepizza" src={this.props.url}/>
+
             <ul>{this.props.ingredients.map(function(result) {
                 return <li>{result.name}</li>;
             })}</ul>
@@ -43,7 +44,7 @@ var Pizza = React.createClass({
     render: function() {
         // Generation of virtual DOM row pizza
         return <div>{this.state.pizzas.map(function (item, index) {
-            return <ElemPizza key={item.name} name={item.name} number={item.number} ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker"/>
+            return <ElemPizza index={index} key={item.name} name={item.name} number={item.number} ingredients={item.ingredients} url={item.url} target="http://localhost:8080/admin/cooker"/>
         })}</div>;
     }
 
@@ -178,3 +179,8 @@ ReactDOM.render(
 );
 
 
+class RowPizza extends React.Component{
+    render(){
+
+    }
+}
