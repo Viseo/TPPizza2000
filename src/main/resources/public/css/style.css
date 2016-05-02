@@ -3,6 +3,8 @@ header {
     padding-bottom: 15px;
     margin-bottom: 15px;
     width: 100%;
+}
+.header-title{
     color: #EA4E5C;
 }
 .header{

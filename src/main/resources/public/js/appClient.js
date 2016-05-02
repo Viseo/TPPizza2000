@@ -56,7 +56,7 @@ var Panier = React.createClass({
     render: function() {
         return<div className="row-fluid text-center">
             <div className="col-md-4 col-md-offset-4">
-                <h1>{this.state.title}</h1>
+                <h1 className="header-title">{this.state.title}</h1>
             </div>
             <div className="col-md-1 col-md-offset-2">
                 <div id="notification" className="notification-hide">0</div>
