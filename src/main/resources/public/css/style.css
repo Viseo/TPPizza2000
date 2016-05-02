@@ -1,7 +1,12 @@
 header {
-    background-color: #D8D8D8;
+    background: url("../images/background_repeat.png") repeat;
     padding-bottom: 15px;
     margin-bottom: 15px;
+    width: 100%;
+    color: #EA4E5C;
+}
+.header{
+    width: 100%;
 }
 body{
     font-family: "Indie Flower", Arial, sans;
@@ -136,10 +141,15 @@ button#plus{
     border:none;
     width: 20px;
 }
+.ingredients-nav {
+    margin-top: -15px;
+    margin-left: -30px;
+}
 #ingredients{
     padding-top: 20px;
     padding-left: 20px;
     background: url("../images/background_repeat.png") repeat;
+    border: 50px;
 }
 .list-group, .list-group-item {
     background-color: inherit;
