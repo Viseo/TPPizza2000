@@ -1,7 +1,7 @@
 /**
  * Created by ABE3510 on 28/04/2016.
  */
-var url = "10.33.170.128:8080";
+var url = "10.33.171.4:8080";
 //var url = "localhost:8080";
 var ElemPizza = React.createClass({
     getInitialState : function () {
