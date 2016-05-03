@@ -1,8 +1,8 @@
 /**
  * Created by ABE3510 on 28/04/2016.
  */
-var url = "10.33.171.4:8080";
-//var url = "localhost:8080";
+//var url = "10.33.171.4:8080";
+var url = "localhost:8080";
 var ElemPizza = React.createClass({
     getInitialState : function () {
         return {data: [], number : this.props.number, name : this.props};
@@ -109,7 +109,7 @@ var Panier = React.createClass({
                         var data = {"pizzas" :_pizzas};
                         console.log(data);
                         $.ajax({
-                            url: target,
+                            url: "http://localhost:8080/admin/buypizza",
                             contentType:'application/json',
                             type: 'POST',
                             data:  JSON.stringify(data),

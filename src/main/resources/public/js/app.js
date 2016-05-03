@@ -1,6 +1,6 @@
 var tmpIngredients = [];
-var url = "10.33.171.4:8080";
-//var url = "localhost:8080";
+//var url = "10.33.171.4:8080";
+var url = "localhost:8080";
 class ElemPizza extends React.Component {
     constructor(props) {
         super(props);
@@ -32,7 +32,7 @@ class ElemPizza extends React.Component {
         var data = {"ingredient": tmpIngredients, "pizza": pizza};
         var index = this.props.index;
         $.ajax({
-            url: this.props.target,
+            url: "http://localhost:8080/admin/cooker",
             contentType: 'application/json',
             type: 'POST',
             data: JSON.stringify(data),
